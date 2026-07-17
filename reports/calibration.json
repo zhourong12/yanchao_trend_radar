@@ -1,0 +1,12 @@
+﻿[
+  { "metric": "db_time", "value_text": "2026-07-10 09:42:50", "value_num": null },
+  { "metric": "session_timezone", "value_text": "Asia/Shanghai", "value_num": null },
+  { "metric": "users_all", "value_text": null, "value_num": 1171 },
+  { "metric": "users_non_test", "value_text": null, "value_num": 1171 },
+  { "metric": "sendorders_all", "value_text": null, "value_num": 547 },
+  { "metric": "sendorders_not_deleted", "value_text": null, "value_num": 547 },
+  { "metric": "goods_all", "value_text": null, "value_num": 4267 },
+  { "metric": "goods_not_deleted", "value_text": null, "value_num": 4121 },
+  { "metric": "coupons_all", "value_text": null, "value_num": 5460 },
+  { "metric": "activity_coupons", "value_text": null, "value_num": 1064 }
+]

@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Trends 当前数据 · 雁潮机会雷达</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --c-bg: #1c2644;
+        --c-bg-alt: #232f55;
+        --c-bg-light: #f0ece3;
+        --c-bg-light-alt: #e6e0d4;
+        --c-fg: #e2dcd0;
+        --c-fg-2: #8a96a8;
+        --c-fg-3: #4e5a6e;
+        --c-fg-light: #1a2030;
+        --c-fg-light-2: #5a6270;
+        --c-fg-light-3: #9aa0a8;
+        --c-accent: #c8a870;
+        --c-border: #2e3d5c;
+        --c-border-light: #cac4b4;
+        --f-display: "Source Serif 4", "Noto Serif SC", Georgia, serif;
+        --f-body: "DM Sans", "Noto Sans SC", system-ui, sans-serif;
+        --f-mono: "IBM Plex Mono", "JetBrains Mono", monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        color: var(--c-fg-light);
+        background: var(--c-bg-light);
+        font-family: var(--f-body);
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        min-height: 490px;
+        padding: 34px clamp(24px, 6vw, 96px) 52px;
+        color: var(--c-fg);
+        background: var(--c-bg);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgb(255 255 255 / 3%) 1px, transparent 1px),
+          linear-gradient(90deg, rgb(255 255 255 / 3%) 1px, transparent 1px);
+        background-size: 80px 80px;
+        pointer-events: none;
+      }
+
+      .hero > * {
+        position: relative;
+      }
+
+      .chrome,
+      .footline {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        border-bottom: 1px solid var(--c-border);
+        padding-bottom: 14px;
+        color: var(--c-fg-2);
+        font-family: var(--f-mono);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .hero-copy {
+        display: grid;
+        grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.7fr);
+        gap: clamp(32px, 7vw, 110px);
+        align-items: end;
+        margin-top: 72px;
+      }
+
+      .kicker,
+      .section-kicker {
+        margin: 0 0 14px;
+        color: var(--c-accent);
+        font-family: var(--f-mono);
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 900px;
+        margin-bottom: 22px;
+        font-family: var(--f-display);
+        font-size: clamp(48px, 7.5vw, 112px);
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        line-height: 0.93;
+      }
+
+      h1 em,
+      h2 em {
+        color: var(--c-accent);
+        font-weight: 400;
+      }
+
+      .hero-lead {
+        max-width: 740px;
+        margin: 0;
+        color: var(--c-fg-2);
+        font-size: clamp(15px, 1.3vw, 20px);
+        line-height: 1.65;
+      }
+
+      .snapshot-note {
+        border-left: 1px solid var(--c-accent);
+        padding-left: 22px;
+      }
+
+      .snapshot-note strong {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--c-fg);
+        font-family: var(--f-display);
+        font-size: 26px;
+        font-weight: 500;
+      }
+
+      .snapshot-note span {
+        color: var(--c-fg-2);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      main {
+        width: min(1440px, 100%);
+        margin: 0 auto;
+        padding: 44px clamp(20px, 5vw, 72px) 80px;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        border-top: 1px solid var(--c-border-light);
+        border-bottom: 1px solid var(--c-border-light);
+      }
+
+      .stat {
+        min-height: 150px;
+        border-right: 1px solid var(--c-border-light);
+        padding: 24px;
+      }
+
+      .stat:last-child {
+        border-right: 0;
+      }
+
+      .stat span {
+        display: block;
+        margin-bottom: 14px;
+        color: var(--c-fg-light-2);
+        font-family: var(--f-mono);
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .stat strong {
+        font-family: var(--f-display);
+        font-size: clamp(38px, 4.4vw, 68px);
+        font-weight: 500;
+        line-height: 1;
+      }
+
+      .stat small {
+        display: block;
+        margin-top: 10px;
+        color: var(--c-fg-light-3);
+        font-size: 12px;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 32px;
+        align-items: end;
+        margin: 56px 0 22px;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-family: var(--f-display);
+        font-size: clamp(34px, 4vw, 58px);
+        font-weight: 500;
+        letter-spacing: -0.025em;
+      }
+
+      .section-head p {
+        max-width: 520px;
+        margin: 0;
+        color: var(--c-fg-light-2);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .country-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px 28px;
+        border-top: 1px solid var(--c-border-light);
+        border-bottom: 1px solid var(--c-border-light);
+        padding: 24px 0;
+      }
+
+      .country-row {
+        display: grid;
+        grid-template-columns: 32px minmax(0, 1fr) 34px;
+        gap: 10px;
+        align-items: center;
+        font-family: var(--f-mono);
+        font-size: 11px;
+      }
+
+      .country-bar {
+        height: 6px;
+        background: var(--c-bg-light-alt);
+      }
+
+      .country-bar i {
+        display: block;
+        height: 100%;
+        background: var(--c-accent);
+      }
+
+      .controls {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: grid;
+        grid-template-columns: minmax(220px, 1.5fr) 150px 170px auto;
+        gap: 10px;
+        border: 1px solid var(--c-border-light);
+        padding: 12px;
+        background: rgb(240 236 227 / 94%);
+        backdrop-filter: blur(12px);
+      }
+
+      input,
+      select,
+      button {
+        min-height: 42px;
+        border: 1px solid var(--c-border-light);
+        border-radius: 0;
+        padding: 0 12px;
+        color: var(--c-fg-light);
+        background: transparent;
+        font: inherit;
+      }
+
+      button {
+        border-color: var(--c-bg);
+        color: var(--c-fg);
+        background: var(--c-bg);
+        cursor: pointer;
+      }
+
+      button:disabled {
+        cursor: wait;
+        opacity: 0.55;
+      }
+
+      .status-line {
+        min-height: 26px;
+        margin: 10px 0 0;
+        color: var(--c-fg-light-2);
+        font-family: var(--f-mono);
+        font-size: 10px;
+      }
+
+      .table-shell {
+        overflow: auto;
+        max-height: 760px;
+        border: 1px solid var(--c-border-light);
+        background: rgb(255 255 255 / 28%);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+
+      th {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        color: var(--c-fg-2);
+        background: var(--c-bg);
+        font-family: var(--f-mono);
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-align: left;
+        text-transform: uppercase;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--c-border-light);
+        padding: 13px 14px;
+        vertical-align: middle;
+      }
+
+      tbody tr:hover {
+        background: rgb(200 168 112 / 12%);
+      }
+
+      .rank {
+        width: 54px;
+        color: var(--c-fg-light-3);
+        font-family: var(--f-mono);
+      }
+
+      .market {
+        width: 64px;
+        font-family: var(--f-mono);
+        font-weight: 500;
+      }
+
+      .query a {
+        color: var(--c-fg-light);
+        font-weight: 600;
+        text-decoration-color: var(--c-border-light);
+        text-underline-offset: 3px;
+      }
+
+      .traffic {
+        width: 118px;
+        font-family: var(--f-mono);
+      }
+
+      .time {
+        width: 170px;
+        color: var(--c-fg-light-2);
+        font-family: var(--f-mono);
+        font-size: 11px;
+      }
+
+      .tag {
+        display: inline-flex;
+        border: 1px solid var(--c-border-light);
+        padding: 4px 7px;
+        color: var(--c-fg-light-2);
+        font-family: var(--f-mono);
+        font-size: 10px;
+      }
+
+      .method {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        margin-top: 20px;
+        background: var(--c-border);
+      }
+
+      .method article {
+        min-height: 190px;
+        padding: 26px;
+        color: var(--c-fg);
+        background: var(--c-bg);
+      }
+
+      .method .num {
+        display: block;
+        margin-bottom: 35px;
+        color: var(--c-accent);
+        font-family: var(--f-mono);
+        font-size: 11px;
+      }
+
+      .method h3 {
+        margin-bottom: 10px;
+        font-family: var(--f-display);
+        font-size: 25px;
+        font-weight: 500;
+      }
+
+      .method p {
+        margin: 0;
+        color: var(--c-fg-2);
+        font-size: 12px;
+        line-height: 1.7;
+      }
+
+      .footline {
+        margin-top: 52px;
+        border-top: 1px solid var(--c-border-light);
+        border-bottom: 0;
+        padding: 18px 0 0;
+        color: var(--c-fg-light-3);
+      }
+
+      @media (max-width: 900px) {
+        .hero-copy,
+        .stats,
+        .country-grid,
+        .method {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-copy {
+          margin-top: 44px;
+        }
+
+        .stat {
+          border-right: 0;
+          border-bottom: 1px solid var(--c-border-light);
+        }
+
+        .controls {
+          position: static;
+          grid-template-columns: 1fr;
+        }
+
+        .section-head {
+          align-items: start;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="chrome">
+        <span>Yanchao Opportunity Radar · Data Inspection</span>
+        <span id="heroTimestamp">Snapshot · 2026-07-13</span>
+      </div>
+      <div class="hero-copy">
+        <div>
+          <p class="kicker">Google Trends / Trending Now</p>
+          <h1>当前数据<br /><em>返回实录</em></h1>
+          <p class="hero-lead">
+            按国家直接读取 Google Trending Now
+            RSS，不预设关键词。下方保留原始查询词、近似搜索量和发现时间，便于核验“拿到了什么”，再决定哪些主题值得转成商品机会。
+          </p>
+        </div>
+        <div class="snapshot-note">
+          <strong>原始热点先于商品判断</strong>
+          <span>本页默认内嵌生成时的实时快照；通过本地开发服务器打开时，可点击“刷新实时数据”重新调用项目 API。</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="stats" aria-label="数据概览">
+        <article class="stat">
+          <span>Raw candidates</span>
+          <strong id="statTotal">—</strong>
+          <small>原始热点查询</small>
+        </article>
+        <article class="stat">
+          <span>Markets returned</span>
+          <strong id="statMarkets">—</strong>
+          <small>本次有返回的国家/地区</small>
+        </article>
+        <article class="stat">
+          <span>Peak traffic</span>
+          <strong id="statPeak">—</strong>
+          <small>Google 提供的近似量级</small>
+        </article>
+        <article class="stat">
+          <span>Product mappings</span>
+          <strong id="statMapped">—</strong>
+          <small>当前规则识别为商品意图</small>
+        </article>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Market coverage</p>
+            <h2>哪些市场<em>返回了热点</em></h2>
+          </div>
+          <p>配置了 10 个国家/地区。本次快照中没有数据的市场不会伪造补齐；中国大陆当前未返回 Trending Now RSS 候选。</p>
+        </div>
+        <div class="country-grid" id="countryGrid"></div>
+      </section>
+
+      <section id="records">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Raw response</p>
+            <h2>原始热点<em>逐条查看</em></h2>
+          </div>
+          <p>搜索量为 RSS 的近似量级，不是完整搜索量；“待识别”表示尚未映射成商品需求，不等于没有商业价值。</p>
+        </div>
+        <div class="controls">
+          <input id="searchInput" type="search" placeholder="搜索热点查询词…" />
+          <select id="marketSelect" aria-label="筛选国家">
+            <option value="all">全部国家</option>
+          </select>
+          <select id="trafficSelect" aria-label="筛选搜索量">
+            <option value="0">全部量级</option>
+            <option value="1000">1,000+</option>
+            <option value="2000">2,000+</option>
+            <option value="10000">10,000+</option>
+          </select>
+          <button id="refreshButton" type="button">刷新实时数据</button>
+        </div>
+        <p class="status-line" id="statusLine">正在加载嵌入快照…</p>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Market</th>
+                <th>Google 热点查询</th>
+                <th>Approx. traffic</th>
+                <th>商品映射</th>
+                <th>Observed at</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Interpretation</p>
+            <h2>这份数据<em>怎么读</em></h2>
+          </div>
+        </div>
+        <div class="method">
+          <article>
+            <span class="num">01 / DISCOVER</span>
+            <h3>无需关键词发现</h3>
+            <p>来源是 Google 官方 Trending Now RSS。系统按配置国家读取当前突增查询，而不是先拿固定商品词去询问热度。</p>
+          </article>
+          <article>
+            <span class="num">02 / INTERPRET</span>
+            <h3>保留全部原始主题</h3>
+            <p>新闻、人物、体育和消费主题都会先进入候选池。未匹配商品的记录保持“待识别”，不会在采集阶段被悄悄删除。</p>
+          </article>
+          <article>
+            <span class="num">03 / VALIDATE</span>
+            <h3>商业验证后置</h3>
+            <p>
+              只有候选被解释成商品需求后，才进入关键词趋势验证、供给验证和销售验证。Trending Now 本身不等于商业机会。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footline">
+        <span>Source · Google Trends Trending Now RSS</span>
+        <span>Generated by Yanchao Opportunity Radar</span>
+      </footer>
+    </main>
+
+    <script>
+      const SNAPSHOT_TSV = `
+IT\tkate middleton wimbledon\t10000\t2026-07-12T20:10:00.000Z
+AU\trichard scolyer\t2000\t2026-07-13T01:10:00.000Z
+AU\taces vs fever\t2000\t2026-07-13T00:50:00.000Z
+AU\taustralian immigration card\t2000\t2026-07-13T00:40:00.000Z
+AU\tkfc breakfast menu\t2000\t2026-07-13T00:00:00.000Z
+GB\tiran war hormuz\t2000\t2026-07-12T23:50:00.000Z
+GB\tfigaro\t2000\t2026-07-12T23:00:00.000Z
+US\tnetflix new releases\t2000\t2026-07-13T04:20:00.000Z
+US\tfigaro\t2000\t2026-07-13T04:00:00.000Z
+FR\tloto résultats loto\t2000\t2026-07-13T04:30:00.000Z
+HK\t愛 回 家\t2000\t2026-07-13T03:50:00.000Z
+HK\t中 年 好 聲音 4 10 強 名單\t2000\t2026-07-12T23:10:00.000Z
+GB\tsmackdown\t1000\t2026-07-12T23:10:00.000Z
+GB\tgraham norton\t1000\t2026-07-12T22:10:00.000Z
+US\tbest movies this year\t1000\t2026-07-13T03:50:00.000Z
+IT\tpele\t1000\t2026-07-12T22:10:00.000Z
+IT\tpaolo fresco\t1000\t2026-07-12T20:50:00.000Z
+IT\tstrada statale 36 del lago di como e dello spluga\t1000\t2026-07-12T20:50:00.000Z
+IT\talex favaro\t1000\t2026-07-12T20:20:00.000Z
+ES\temelec - barcelona sc\t1000\t2026-07-12T22:40:00.000Z
+ES\tincendios\t1000\t2026-07-12T21:50:00.000Z
+AU\tavengers doomsday cast\t500\t2026-07-13T02:50:00.000Z
+GB\tpostcode lottery results\t500\t2026-07-13T02:40:00.000Z
+GB\tryan gosling\t500\t2026-07-12T22:30:00.000Z
+US\tsmackdown\t500\t2026-07-13T04:10:00.000Z
+US\tdemocratic republic of the congo\t500\t2026-07-13T04:00:00.000Z
+US\tmichael jordan\t500\t2026-07-13T03:50:00.000Z
+IT\tstones\t500\t2026-07-12T21:40:00.000Z
+ES\tirán\t500\t2026-07-12T22:50:00.000Z
+ES\tiniesta\t500\t2026-07-12T22:50:00.000Z
+ES\tandres iniesta\t500\t2026-07-12T22:50:00.000Z
+CA\tjamie laboucane\t500\t2026-07-13T04:20:00.000Z
+HK\t7709\t500\t2026-07-13T02:10:00.000Z
+HK\tsk hynix\t500\t2026-07-13T01:50:00.000Z
+HK\t將軍澳線\t500\t2026-07-12T23:40:00.000Z
+DE\twaldbrand\t500\t2026-07-13T04:20:00.000Z
+AU\troaming\t200\t2026-07-13T04:10:00.000Z
+AU\tapple iphone 18 pro\t200\t2026-07-13T04:10:00.000Z
+AU\tyou tube\t200\t2026-07-13T04:00:00.000Z
+AU\tengland football world cup\t200\t2026-07-13T00:40:00.000Z
+GB\taces vs fever\t200\t2026-07-13T02:30:00.000Z
+GB\tapple iphone 18 pro max\t200\t2026-07-13T00:40:00.000Z
+GB\tjosh grisetti\t200\t2026-07-12T23:40:00.000Z
+US\tshia labeouf\t200\t2026-07-13T04:10:00.000Z
+IT\tvlahovic\t200\t2026-07-13T03:30:00.000Z
+IT\tstefano corti\t200\t2026-07-12T21:30:00.000Z
+ES\tcall of duty: black ops ii\t200\t2026-07-13T01:10:00.000Z
+ES\trevenge\t200\t2026-07-12T23:30:00.000Z
+ES\tcorrupción\t200\t2026-07-12T22:40:00.000Z
+ES\tfestival\t200\t2026-07-12T22:10:00.000Z
+ES\tmiguel ángel revilla\t200\t2026-07-12T22:10:00.000Z
+CA\tfigaro\t200\t2026-07-13T04:10:00.000Z
+CA\tbangkok pub fire\t200\t2026-07-13T04:10:00.000Z
+CA\tkospi\t200\t2026-07-13T03:50:00.000Z
+CA\tlaura ingalls wilder\t200\t2026-07-13T03:50:00.000Z
+CA\tvideo game remake\t200\t2026-07-13T03:40:00.000Z
+FR\tun si grand soleil episode 1964\t200\t2026-07-13T04:30:00.000Z
+FR\tпогода\t200\t2026-07-13T04:20:00.000Z
+FR\tincendie majeur\t200\t2026-07-13T04:00:00.000Z
+HK\t百度\t200\t2026-07-13T02:40:00.000Z
+HK\tcodex\t200\t2026-07-13T02:20:00.000Z
+HK\t將軍澳\t200\t2026-07-12T23:20:00.000Z
+DE\tmatthias helferich\t200\t2026-07-13T04:20:00.000Z
+DE\ttabaksteuer\t200\t2026-07-13T04:10:00.000Z
+DE\tschmidtis blog\t200\t2026-07-13T04:00:00.000Z
+DE\tiran news\t200\t2026-07-13T04:00:00.000Z
+DE\tbz\t200\t2026-07-13T03:20:00.000Z
+DE\tjulian ryerson\t200\t2026-07-13T03:10:00.000Z
+DE\thandelsblatt\t200\t2026-07-13T03:10:00.000Z
+AU\twho won love island usa season 8\t100\t2026-07-13T00:00:00.000Z
+GB\tartificial intelligence news\t100\t2026-07-13T02:40:00.000Z
+US\twhat is the news today\t100\t2026-07-13T04:20:00.000Z
+US\txero\t100\t2026-07-13T04:00:00.000Z
+US\tnews today world\t100\t2026-07-13T04:00:00.000Z
+IT\tgianni infantino\t100\t2026-07-13T04:20:00.000Z
+IT\thormuz\t100\t2026-07-13T04:10:00.000Z
+CA\tchuckwagon races\t100\t2026-07-13T03:50:00.000Z
+CA\tpessamit\t100\t2026-07-13T03:20:00.000Z
+CA\tmoana 2\t100\t2026-07-13T03:10:00.000Z
+CA\tariana madix\t100\t2026-07-13T03:10:00.000Z
+FR\tinfo du jour\t100\t2026-07-13T04:30:00.000Z
+FR\tmediapart\t100\t2026-07-13T04:30:00.000Z
+FR\tmaine-et-loire\t100\t2026-07-13T04:20:00.000Z
+FR\tmeteo montpellier\t100\t2026-07-13T04:20:00.000Z
+FR\tmeteo marseille\t100\t2026-07-13T04:20:00.000Z
+FR\tactualites\t100\t2026-07-13T04:10:00.000Z
+HK\t生肖\t100\t2026-07-12T23:00:00.000Z
+HK\t溫布頓2026\t100\t2026-07-12T22:10:00.000Z
+DE\tbadische zeitung\t100\t2026-07-13T03:30:00.000Z
+DE\thaberler\t100\t2026-07-13T03:30:00.000Z`;
+
+      const snapshot = SNAPSHOT_TSV.trim()
+        .split("\n")
+        .map((line, index) => {
+          const [market, query, traffic, observedAt] = line.split("\t");
+          return {
+            id: `snapshot-${index}`,
+            market,
+            query,
+            approximateTraffic: Number(traffic),
+            observedAt,
+            sourceUrl: `https://trends.google.com/trending?geo=${encodeURIComponent(market)}`,
+            matchedKeyword: null
+          };
+        });
+
+      let records = snapshot;
+      const searchInput = document.getElementById("searchInput");
+      const marketSelect = document.getElementById("marketSelect");
+      const trafficSelect = document.getElementById("trafficSelect");
+      const refreshButton = document.getElementById("refreshButton");
+      const statusLine = document.getElementById("statusLine");
+
+      function formatTime(value) {
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return "—";
+        return new Intl.DateTimeFormat("zh-CN", {
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+          timeZone: "Asia/Singapore"
+        }).format(date);
+      }
+
+      function updateMarketOptions() {
+        const current = marketSelect.value;
+        const markets = [...new Set(records.map((item) => item.market))].sort();
+        marketSelect.replaceChildren(new Option("全部国家", "all"));
+        markets.forEach((market) => marketSelect.add(new Option(market, market)));
+        marketSelect.value = markets.includes(current) ? current : "all";
+      }
+
+      function renderCountryGrid() {
+        const counts = records.reduce((result, item) => {
+          result[item.market] = (result[item.market] || 0) + 1;
+          return result;
+        }, {});
+        const max = Math.max(...Object.values(counts), 1);
+        const grid = document.getElementById("countryGrid");
+        grid.replaceChildren();
+        Object.entries(counts)
+          .sort((a, b) => b[1] - a[1])
+          .forEach(([market, count]) => {
+            const row = document.createElement("div");
+            row.className = "country-row";
+            const code = document.createElement("span");
+            code.textContent = market;
+            const bar = document.createElement("span");
+            bar.className = "country-bar";
+            const fill = document.createElement("i");
+            fill.style.width = `${(count / max) * 100}%`;
+            bar.append(fill);
+            const value = document.createElement("span");
+            value.textContent = count;
+            row.append(code, bar, value);
+            grid.append(row);
+          });
+      }
+
+      function renderStats() {
+        document.getElementById("statTotal").textContent = records.length.toLocaleString();
+        document.getElementById("statMarkets").textContent = new Set(records.map((item) => item.market)).size;
+        document.getElementById("statPeak").textContent =
+          `${Math.max(...records.map((item) => item.approximateTraffic), 0).toLocaleString()}+`;
+        document.getElementById("statMapped").textContent = records.filter((item) => item.matchedKeyword).length;
+      }
+
+      function renderTable() {
+        const query = searchInput.value.trim().toLowerCase();
+        const market = marketSelect.value;
+        const minimumTraffic = Number(trafficSelect.value);
+        const filtered = records.filter(
+          (item) =>
+            (!query || item.query.toLowerCase().includes(query)) &&
+            (market === "all" || item.market === market) &&
+            item.approximateTraffic >= minimumTraffic
+        );
+        const body = document.getElementById("tableBody");
+        body.replaceChildren();
+        filtered.forEach((item, index) => {
+          const row = document.createElement("tr");
+          const rank = document.createElement("td");
+          rank.className = "rank";
+          rank.textContent = String(index + 1).padStart(2, "0");
+          const marketCell = document.createElement("td");
+          marketCell.className = "market";
+          marketCell.textContent = item.market;
+          const queryCell = document.createElement("td");
+          queryCell.className = "query";
+          const link = document.createElement("a");
+          link.href = item.sourceUrl;
+          link.target = "_blank";
+          link.rel = "noreferrer";
+          link.textContent = item.query;
+          queryCell.append(link);
+          const trafficCell = document.createElement("td");
+          trafficCell.className = "traffic";
+          trafficCell.textContent = item.approximateTraffic ? `${item.approximateTraffic.toLocaleString()}+` : "未提供";
+          const mappingCell = document.createElement("td");
+          const tag = document.createElement("span");
+          tag.className = "tag";
+          tag.textContent = item.matchedKeyword || "待识别";
+          mappingCell.append(tag);
+          const timeCell = document.createElement("td");
+          timeCell.className = "time";
+          timeCell.textContent = formatTime(item.observedAt);
+          row.append(rank, marketCell, queryCell, trafficCell, mappingCell, timeCell);
+          body.append(row);
+        });
+        statusLine.textContent = `显示 ${filtered.length} / ${records.length} 条 · 当前数据源：${records === snapshot ? "嵌入快照" : "本地实时 API"}`;
+      }
+
+      function renderAll() {
+        updateMarketOptions();
+        renderCountryGrid();
+        renderStats();
+        renderTable();
+      }
+
+      async function refreshLive() {
+        refreshButton.disabled = true;
+        statusLine.textContent = "正在请求 http://127.0.0.1:8787/api/trend-candidates …";
+        try {
+          const response = await fetch("http://127.0.0.1:8787/api/trend-candidates");
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const payload = await response.json();
+          if (!Array.isArray(payload.data)) throw new Error("返回格式不正确");
+          records = payload.data;
+          document.getElementById("heroTimestamp").textContent =
+            `Live API · ${new Date().toLocaleString("zh-CN", { hour12: false })}`;
+          renderAll();
+        } catch (error) {
+          statusLine.textContent = `实时刷新失败：${error.message}。继续显示嵌入快照；请运行 npm run dev，并通过 http://127.0.0.1:5173 打开本页。`;
+        } finally {
+          refreshButton.disabled = false;
+        }
+      }
+
+      searchInput.addEventListener("input", renderTable);
+      marketSelect.addEventListener("change", renderTable);
+      trafficSelect.addEventListener("change", renderTable);
+      refreshButton.addEventListener("click", refreshLive);
+      renderAll();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,299 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "雁巢需求实验室：把机会变成真实需求证据",
+    "description": "基于雁巢商品机会雷达现有能力提出的下一阶段可执行探索项目。",
+    "generatedAt": "2026-07-16T12:00:00+08:00",
+    "charts": [
+      {
+        "id": "candidate_scores",
+        "title": "候选探索方向加权评估",
+        "subtitle": "1–5 分方案评估，5 分最好；基于复用、依赖、证据速度、闭环价值和真实性控制",
+        "type": "bar",
+        "dataset": "candidate_scores",
+        "sourceId": "assessment_notes",
+        "encodings": {
+          "x": {
+            "field": "candidate",
+            "type": "nominal",
+            "label": "候选方向"
+          },
+          "y": {
+            "field": "score",
+            "type": "quantitative",
+            "label": "加权评估分",
+            "format": "number"
+          }
+        },
+        "yAxisTitle": "加权评估分（满分 5）",
+        "valueFormat": "number",
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "candidate_detail",
+        "title": "候选方向评分与一期结论",
+        "subtitle": "评分用于方向优先级比较，不代表市场实测结果",
+        "dataset": "candidate_detail",
+        "sourceId": "assessment_notes",
+        "defaultSort": {
+          "field": "weighted_score",
+          "direction": "desc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          { "field": "candidate", "label": "候选方向", "type": "text" },
+          { "field": "reuse", "label": "能力复用", "format": "number" },
+          { "field": "dependency", "label": "依赖可控", "format": "number" },
+          { "field": "speed", "label": "证据速度", "format": "number" },
+          { "field": "loop_value", "label": "闭环价值", "format": "number" },
+          { "field": "truth_control", "label": "真实性控制", "format": "number" },
+          { "field": "weighted_score", "label": "加权分", "format": "number" },
+          { "field": "phase_one_decision", "label": "一期结论", "type": "text" }
+        ]
+      },
+      {
+        "id": "pilot_rules",
+        "title": "首轮试点决策规则",
+        "subtitle": "每个实验至少 300 个合格去重会话；阈值为首轮学习假设，试点后校准",
+        "dataset": "pilot_rules",
+        "sourceId": "assessment_notes",
+        "defaultSort": {
+          "field": "order",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          { "field": "decision", "label": "决策", "type": "text" },
+          { "field": "sample_rule", "label": "样本条件", "type": "text" },
+          { "field": "intent_rule", "label": "高意向率", "type": "text" },
+          { "field": "guardrail", "label": "附加条件", "type": "text" },
+          { "field": "next_action", "label": "下一步", "type": "text" },
+          { "field": "order", "label": "顺序", "format": "number" }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "assessment_notes",
+        "label": "雁巢需求实验室研究与评分说明",
+        "path": "reports/demand-lab-exploration-2026-07-16/source-notes.md",
+        "query": {
+          "engine": "mysql",
+          "language": "sql",
+          "description": "根据已审核的五项方案评分和固定权重计算候选方向加权分。",
+          "sql": "WITH candidate_inputs AS (SELECT '雁巢需求实验室' AS candidate, 5 AS reuse_score, 4 AS dependency_score, 4 AS speed_score, 5 AS loop_score, 5 AS truth_score UNION ALL SELECT '新增更多趋势源', 4, 4, 4, 2, 3 UNION ALL SELECT 'Amazon 评论痛点实验室', 3, 2, 3, 4, 3) SELECT candidate, ROUND(reuse_score * 0.30 + dependency_score * 0.25 + speed_score * 0.20 + loop_score * 0.15 + truth_score * 0.10, 2) AS score FROM candidate_inputs ORDER BY score DESC",
+          "metric_definitions": {
+            "score": "五项 1–5 分方案评估的加权平均：能力复用 30%、依赖可控 25%、证据速度 20%、闭环价值 15%、真实性控制 10%。"
+          }
+        }
+      },
+      {
+        "id": "amazon_pricing",
+        "label": "Amazon SP-API Product Pricing FAQ",
+        "href": "https://developer-docs.amazon.com/sp-api/docs/pricing-faq"
+      },
+      {
+        "id": "amazon_feedback",
+        "label": "Amazon SP-API Customer Feedback API",
+        "href": "https://developer-docs.amazon.com/sp-api/docs/customer-feedback-api-v2024-06-01-use-case-guide"
+      },
+      {
+        "id": "google_conversion",
+        "label": "Google Tag Platform conversion measurement",
+        "href": "https://developers.google.com/tag-platform/devguides/conversions"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# 雁巢需求实验室：把机会变成真实需求证据"
+      },
+      {
+        "id": "executive_summary",
+        "type": "markdown",
+        "body": "## Executive Summary\n\n- **建议立项“雁巢需求实验室”。** 它承接雷达中已经具备真实趋势和真实供给证据的机会，用本地化概念页和匿名高意向行为补上需求验证，而不是继续用 Seed 或代理分数推断销售。\n- **这是当前复用率最高的闭环方向。** 现有机会阶段、反馈、快照、权限、Adapter 和工作台都可复用；一期不依赖 Amazon 销量接口，也不采集姓名、邮箱或电话。\n- **三周可完成 MVP 并启动试点。** 第三周选择 3 个机会、每个 2 个价格或卖点变体，运行 7 天小流量实验；结果只标为 `first_party_experiment`，绝不冒充订单或 Amazon 销售。\n- **Amazon 评论洞察留到二期。** 官方 Customer Feedback API 已可提供评论和退货主题，但需要特定 Seller/Vendor 角色且覆盖有限，因此先作为授权增强，而不是一期阻塞项。"
+      },
+      {
+        "id": "why_now",
+        "type": "markdown",
+        "body": "## 当前最缺的不是更多热点，而是需求闭环\n\n项目已经能把跨市场热点映射为商品机会，并用 1688 做供给验证；整改后也能诚实区分 discovery、mapped、validation 和 Seed。真正阻塞业务决策的是销售证据仍为空：没有真实需求证据时，商业化、竞争和评论痛点只能保持待验证。\n\n继续增加趋势源会提高候选数量，却不会回答“是否有人愿意为这个商品采取行动”。需求实验室直接补齐这段证据链，并把每次继续、迭代或停止的理由回写到机会，形成下一轮排序校准所需的真实反馈。"
+      },
+      {
+        "id": "chart_intro",
+        "type": "markdown",
+        "body": "## 三个候选方向中，需求实验室最接近可执行闭环\n\n下图比较三个方向的加权评估分。分数来自对当前代码、审计结论和外部授权条件的结构化判断，不是市场实测。需求实验室胜出的关键是：它复用现有能力、能在三周内产生一方行为证据，并且不需要把尚未获得的 Amazon 权限作为启动前提。"
+      },
+      {
+        "id": "candidate_chart",
+        "type": "chart",
+        "chartId": "candidate_scores",
+        "layout": "full"
+      },
+      {
+        "id": "candidate_table_intro",
+        "type": "markdown",
+        "body": "### 评分拆解\n\n五项评分都以 5 分为最佳。新增趋势源实现较快，但闭环价值有限；Amazon 评论痛点方向具备官方接口基础，却依赖 Seller/Vendor 身份和特定角色。需求实验室的主要外部依赖只有可控的小流量入口，代码和数据链路可先独立完成。"
+      },
+      {
+        "id": "candidate_table",
+        "type": "table",
+        "tableId": "candidate_detail",
+        "layout": "full"
+      },
+      {
+        "id": "official_evidence",
+        "type": "markdown",
+        "body": "## 官方接口支持二期增强，但不能替代一期验证\n\nAmazon 的 [Product Pricing API](https://developer-docs.amazon.com/sp-api/docs/pricing-faq) 适合获取价格、报价和 Featured Offer 等定价信息，不能被直接解释为通用竞品销量。新的 [Customer Feedback API](https://developer-docs.amazon.com/sp-api/docs/customer-feedback-api-v2024-06-01-use-case-guide) 能返回评论和退货主题，但要求 Seller/Vendor 角色授权、当前只覆盖部分市场且只提供英文。\n\n另一方面，Google 官方文档明确支持把按钮点击、注册等动作记录为[转化或关键事件](https://developers.google.com/tag-platform/devguides/conversions)。这证明概念页行为验证技术上可行；一期建议事件先进入雁巢自己的表，只有在获得投放授权后才增加第三方像素。"
+      },
+      {
+        "id": "mvp_scope",
+        "type": "markdown",
+        "body": "## MVP 是一条受控实验链路，不是新建电商平台\n\n**输入门槛**：机会至少有 1 个真实趋势来源、供给已验证、没有 Seed 冒充和明显合规阻塞。\n\n**实验对象**：每个机会生成 2 个变体，只改变一个主要变量，例如价格带或核心卖点。页面必须显示“需求验证中，尚未开放购买”。\n\n**事件口径**：记录匿名页面浏览、价格选择和高意向点击；24 小时内按匿名 session 去重，并过滤机器人和无法识别目标市场的流量。\n\n**输出证据**：形成 `first_party_experiment` 快照，包含合格会话、高意向率、无效流量率、变体差异和人工结论。该证据可以推进“验证中”，但不得自动升级为“可行动”。"
+      },
+      {
+        "id": "architecture",
+        "type": "markdown",
+        "body": "## 代码层面可沿现有边界最小扩展\n\n新增四个数据对象：`validation_experiments`、`experiment_variants`、`experiment_events` 和 `experiment_snapshots`。事件写入与聚合分离，GET 接口只读快照，保持当前项目已经建立的可追溯原则。\n\n最小接口为：创建实验草稿、显式发布、读取快照、匿名事件写入和人工决策。工作台只需新增“需求实验”页，并在机会详情中显示实验状态与最新结论。外部域名发布、广告投放和第三方像素都保留为显式受保护动作。"
+      },
+      {
+        "id": "three_week_plan",
+        "type": "markdown",
+        "body": "## 三周实施后即可获得第一轮学习\n\n1. **第 1 周：打通底座。** 完成迁移、领域类型、匿名事件写入、限流去重、快照聚合和概念页模板。\n2. **第 2 周：接入工作台。** 增加实验创建、结果查看和机会证据回写；用测试流量验证 Seed 隔离、机器人过滤、错误态和权限。\n3. **第 3 周：运行 3×2 试点。** 选择 3 个真实趋势与真实供给机会，每个运行 2 个变体和 7 天小流量；第 7 天只做继续、迭代或停止决策，不做采购或上架承诺。"
+      },
+      {
+        "id": "pilot_intro",
+        "type": "markdown",
+        "body": "## 首轮用明确门槛避免“看起来不错”\n\n主要指标是高意向率：发生价格选择或“希望购买/继续了解”动作的去重会话数，除以合格去重会话数。以下阈值只是第一轮学习规则，不是行业基准；试点结束后必须按市场、渠道和类目校准，并同时显示样本量和区间。"
+      },
+      {
+        "id": "pilot_table",
+        "type": "table",
+        "tableId": "pilot_rules",
+        "layout": "full"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## 推荐下一步\n\n1. 决定是否把一期限定为**匿名行为验证**；建议是，以降低隐私和合规复杂度。\n2. 指定一个首选试点市场，并批准最多 3 个机会进入实验；默认优先从已有真实趋势覆盖和真实供给都完整的市场中选择。\n3. 确认小流量来源与预算上限。没有投放授权时，先完成代码和内部测试，不擅自发布域名或购买流量。\n4. 立项后先实现迁移、共享类型和领域测试，再做页面，避免用漂亮概念页掩盖事件口径和去重问题。"
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## 需要在开工前确认的三个问题\n\n- 首轮市场选哪一个：US、GB、DE，还是当前真实机会证据最完整的市场？\n- 首轮流量来自既有私域、自然流量，还是一笔有上限的广告预算？\n- 一期是否坚持匿名高意向点击，还是允许带明确同意的留资？后者会增加隐私、删除和保留期工作。"
+      },
+      {
+        "id": "caveats",
+        "type": "markdown",
+        "body": "## 假设与边界\n\n- 本报告依据 2026 年 7 月 16 日的项目代码、整改记录和官方接口文档，没有读取远程 MySQL 的最新业务数据，也没有发起真实投放。\n- 一方意向证据比 Seed 更可靠，但仍不是订单、复购或真实销售；它不能替代 Amazon 销售、退款、竞争或完整财务毛利。\n- 方案评分是结构化判断，权重和分数对业务偏好敏感；如果团队已经具备 Amazon Seller/Vendor 授权，评论痛点方向的优先级会提高。\n- 广告花费、生产域名、第三方像素、OAuth 和外部消息均需用户另行明确授权。"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-16T12:00:00+08:00",
+    "status": "ready",
+    "datasets": {
+      "candidate_scores": [
+        { "candidate": "雁巢需求实验室", "score": 4.55 },
+        { "candidate": "新增更多趋势源", "score": 3.6 },
+        { "candidate": "Amazon 评论痛点实验室", "score": 2.9 }
+      ],
+      "candidate_detail": [
+        {
+          "candidate": "雁巢需求实验室",
+          "reuse": 5,
+          "dependency": 4,
+          "speed": 4,
+          "loop_value": 5,
+          "truth_control": 5,
+          "weighted_score": 4.55,
+          "phase_one_decision": "推荐立项"
+        },
+        {
+          "candidate": "新增更多趋势源",
+          "reuse": 4,
+          "dependency": 4,
+          "speed": 4,
+          "loop_value": 2,
+          "truth_control": 3,
+          "weighted_score": 3.6,
+          "phase_one_decision": "只做按需补充"
+        },
+        {
+          "candidate": "Amazon 评论痛点实验室",
+          "reuse": 3,
+          "dependency": 2,
+          "speed": 3,
+          "loop_value": 4,
+          "truth_control": 3,
+          "weighted_score": 2.9,
+          "phase_one_decision": "二期授权增强"
+        }
+      ],
+      "pilot_rules": [
+        {
+          "decision": "继续",
+          "sample_rule": "≥300 个合格去重会话",
+          "intent_rule": "≥3%",
+          "guardrail": "真实供给仍有效",
+          "next_action": "进入更强需求验证或打样评估",
+          "order": 1
+        },
+        {
+          "decision": "迭代",
+          "sample_rule": "样本不足，或已达到 300",
+          "intent_rule": "1%–3%",
+          "guardrail": "趋势仍新鲜且无合规阻塞",
+          "next_action": "只改一个变量后再测",
+          "order": 2
+        },
+        {
+          "decision": "停止",
+          "sample_rule": "≥300 个合格去重会话",
+          "intent_rule": "<1%",
+          "guardrail": "或无效流量 >25%，或供给/合规失效",
+          "next_action": "记录原因并回写放弃反馈",
+          "order": 3
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "assessment_notes",
+      "label": "雁巢需求实验室研究与评分说明",
+      "path": "reports/demand-lab-exploration-2026-07-16/source-notes.md",
+      "query": {
+        "engine": "mysql",
+        "language": "sql",
+        "description": "根据已审核的五项方案评分和固定权重计算候选方向加权分。",
+        "sql": "WITH candidate_inputs AS (SELECT '雁巢需求实验室' AS candidate, 5 AS reuse_score, 4 AS dependency_score, 4 AS speed_score, 5 AS loop_score, 5 AS truth_score UNION ALL SELECT '新增更多趋势源', 4, 4, 4, 2, 3 UNION ALL SELECT 'Amazon 评论痛点实验室', 3, 2, 3, 4, 3) SELECT candidate, ROUND(reuse_score * 0.30 + dependency_score * 0.25 + speed_score * 0.20 + loop_score * 0.15 + truth_score * 0.10, 2) AS score FROM candidate_inputs ORDER BY score DESC",
+        "metric_definitions": {
+          "score": "五项 1–5 分方案评估的加权平均：能力复用 30%、依赖可控 25%、证据速度 20%、闭环价值 15%、真实性控制 10%。"
+        }
+      }
+    },
+    {
+      "id": "amazon_pricing",
+      "label": "Amazon SP-API Product Pricing FAQ",
+      "href": "https://developer-docs.amazon.com/sp-api/docs/pricing-faq"
+    },
+    {
+      "id": "amazon_feedback",
+      "label": "Amazon SP-API Customer Feedback API",
+      "href": "https://developer-docs.amazon.com/sp-api/docs/customer-feedback-api-v2024-06-01-use-case-guide"
+    },
+    {
+      "id": "google_conversion",
+      "label": "Google Tag Platform conversion measurement",
+      "href": "https://developers.google.com/tag-platform/devguides/conversions"
+    }
+  ]
+}

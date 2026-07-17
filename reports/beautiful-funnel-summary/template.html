@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>订单打包｜两周期研发观察</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&family=Tektur:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--void:#0a0e27;--navy:#0f1b3d;--cyan:#5edcf4;--pink:#f0a6ca;--yellow:#f4d03f;--lav:#e2d5f2;--white:#fff;--muted:#91a0bf;--line:rgba(94,220,244,.18)}
+    *{box-sizing:border-box}html,body{margin:0;width:100%;min-height:100%;background:var(--void);color:var(--white);font-family:'Chakra Petch','Noto Sans SC',sans-serif}
+    body{background-image:linear-gradient(rgba(94,220,244,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(94,220,244,.045) 1px,transparent 1px),radial-gradient(circle at 82% 0,rgba(94,220,244,.1),transparent 30%);background-size:40px 40px,40px 40px,100% 100%}
+    body:after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(0,0,0,.025) 3px,rgba(0,0,0,.025) 4px)}
+    .page{width:min(1450px,100%);min-height:100vh;margin:auto;padding:30px 42px 28px;position:relative}.top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:13px;font:700 10px 'Space Mono';letter-spacing:.14em;color:var(--cyan)}.online{display:flex;align-items:center;gap:9px}.online i{width:8px;height:8px;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:pulse 1.8s infinite}.date{font-weight:400;color:var(--muted);letter-spacing:.06em}
+    .hero{display:grid;grid-template-columns:1.35fr .65fr;gap:36px;align-items:end;margin:30px 0 22px}.eyebrow{font:700 10px 'Space Mono';letter-spacing:.2em;color:var(--yellow);margin-bottom:9px}.hero h1{font:800 clamp(36px,4.8vw,70px)/1.04 'Tektur','Noto Sans SC';letter-spacing:-.025em;margin:0}.hero h1 span{display:block;color:var(--cyan);text-shadow:3px 3px 0 var(--navy)}.stamp{justify-self:end;border:1px solid var(--yellow);color:var(--yellow);padding:10px 14px;font:700 11px 'Space Mono';letter-spacing:.1em;box-shadow:6px 6px 0 rgba(244,208,63,.1)}
+    .panel{position:relative;background:rgba(15,27,61,.79);border:1px solid var(--line);box-shadow:7px 7px 0 rgba(94,220,244,.055)}.panel:before,.panel:after{content:"";position:absolute;width:20px;height:20px}.panel:before{left:-2px;top:-2px;border-left:3px solid var(--cyan);border-top:3px solid var(--cyan)}.panel:after{right:-2px;bottom:-2px;border-right:3px solid var(--cyan);border-bottom:3px solid var(--cyan)}
+    .chart-panel{height:455px;padding:18px 22px 12px}.chart-head{display:flex;justify-content:space-between;align-items:flex-start}.kicker{font:700 9px 'Space Mono';letter-spacing:.16em;color:var(--cyan)}.chart-head h2{font:700 18px 'Tektur','Noto Sans SC';margin:5px 0 0}.legend{font:10px 'Space Mono';color:var(--muted)}.legend i{display:inline-block;width:18px;border-top:3px solid var(--cyan);margin:0 5px 3px 13px}.legend i.tail{border-color:var(--pink);border-top-style:dashed}
+    #chart{width:100%;height:370px;display:block}.gridline{stroke:rgba(94,220,244,.12);stroke-width:1}.axis{font:11px 'Space Mono';fill:var(--muted)}.axis.period{fill:var(--lav);font-weight:700}.line50{fill:none;stroke:var(--cyan);stroke-width:5}.line90{fill:none;stroke:var(--pink);stroke-width:4;stroke-dasharray:10 8}.line50,.line90{stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 1.1s ease forwards}.point{cursor:pointer;stroke:var(--void);stroke-width:3;transition:transform .16s,filter .16s;transform-box:fill-box;transform-origin:center}.point:hover,.point.active{transform:scale(1.55);filter:drop-shadow(0 0 8px currentColor)}.p50{fill:var(--cyan);color:var(--cyan)}.p90{fill:var(--pink);color:var(--pink)}.coverage-bg{fill:rgba(244,208,63,.14)}.coverage{fill:var(--yellow)}.delta{font:700 12px 'Space Mono';fill:var(--yellow)}
+    .tooltip{position:absolute;z-index:5;min-width:205px;padding:11px 13px;background:#050818;border:1px solid var(--cyan);box-shadow:6px 6px 0 rgba(94,220,244,.12);opacity:0;pointer-events:none;transform:translate(-50%,-115%)}.tooltip.show{opacity:1}.tooltip small,.tooltip span{display:block;font:10px/1.5 'Space Mono';color:var(--muted)}.tooltip b{display:block;font:700 19px 'Tektur';color:var(--cyan);margin:3px 0}
+    .conclusion{margin-top:18px;padding:18px 22px;display:grid;grid-template-columns:150px 1fr;gap:22px;align-items:center}.verdict{font:800 25px/1.1 'Tektur','Noto Sans SC';color:var(--yellow)}.conclusion p{font-size:14px;line-height:1.8;margin:0;color:var(--lav)}.conclusion strong{color:var(--white)}
+    footer{display:flex;justify-content:space-between;margin-top:13px;font:9px/1.5 'Space Mono';color:#71809f}.static .line50,.static .line90{animation:none;stroke-dashoffset:0}.static .online i{animation:none}@keyframes draw{to{stroke-dashoffset:0}}@keyframes pulse{50%{opacity:.35;box-shadow:none}}
+    @media(max-width:800px){.page{padding:22px}.hero{grid-template-columns:1fr}.stamp{justify-self:start}.chart-panel{height:420px}.conclusion{grid-template-columns:1fr}.date{display:none}}
+  </style>
+</head>
+<body>
+<main class="page">
+  <header class="top"><div class="online"><i></i>ENGINEERING REVIEW / ONLINE</div><div class="date">上周期 07/03–07/09 · 本周期 07/10–07/16 · UTC+8</div></header>
+  <section class="hero"><div><div class="eyebrow">TWO-CYCLE REVIEW</div><h1>订单打包变快了，<span>但现在还不能盖章</span></h1></div><div class="stamp">STATUS · 初步改善</div></section>
+
+  <article class="panel chart-panel">
+    <div class="chart-head"><div><div class="kicker">PACKING TIME</div><h2>从订单创建到打包完成</h2></div><div class="legend"><i></i>典型订单 <i class="tail"></i>慢订单</div></div>
+    <svg id="chart" viewBox="0 0 1100 370" role="img" aria-label="上周期和本周期订单打包耗时对比"></svg><div id="tooltip" class="tooltip"></div>
+  </article>
+
+  <section class="panel conclusion"><div class="verdict">负责人结论</div><p>和上周期相比，典型订单从 <strong>30.2 小时降到 23.1 小时</strong>，慢订单从 <strong>65.6 小时降到 50.7 小时</strong>，改善方向明确。但本周期目前只有 <strong>89.7%</strong> 的订单完成打包，剩余的往往是更慢的订单。<strong>因此先把它定义为“初步改善”，暂不承诺 SLA 已稳定提升；研发继续盯住未完成订单和慢订单长尾。</strong></p></section>
+  <footer><span>口径：非测试用户、净订单；P50 代表典型订单，P90 代表较慢的一批订单。</span><span>限制：本周期仍有订单未完成，最终耗时可能回升。</span></footer>
+</main>
+<script>
+const labels=['上周期\n07/03–07/09','本周期\n07/10–07/16'],p50=[30.2,23.1],p90=[65.6,50.7],coverage=[100,89.7];
+if(new URLSearchParams(location.search).has('static'))document.body.classList.add('static');
+const svg=document.getElementById('chart'),tip=document.getElementById('tooltip'),W=1100,H=370,L=70,R=35,T=30,B=70,max=80,pw=W-L-R,ph=H-T-B,x=i=>L+220+i*(pw-440),y=v=>T+ph-(v/max)*ph;let s='';
+[0,20,40,60,80].forEach(v=>s+=`<line class="gridline" x1="${L}" y1="${y(v)}" x2="${W-R}" y2="${y(v)}"/><text class="axis" x="${L-12}" y="${y(v)+4}" text-anchor="end">${v}h</text>`);
+labels.forEach((l,i)=>{const [a,b]=l.split('\n');s+=`<text class="axis period" x="${x(i)}" y="${H-36}" text-anchor="middle">${a}</text><text class="axis" x="${x(i)}" y="${H-20}" text-anchor="middle">${b}</text><rect class="coverage-bg" x="${x(i)-48}" y="${H-9}" width="96" height="5"/><rect class="coverage" x="${x(i)-48}" y="${H-9}" width="${96*coverage[i]/100}" height="5"/>`});
+const path=a=>a.map((v,i)=>`${i?'L':'M'}${x(i)},${y(v)}`).join(' ');s+=`<path class="line50" d="${path(p50)}"/><path class="line90" d="${path(p90)}"/>`;
+[['p50',p50],['p90',p90]].forEach(([key,a])=>a.forEach((v,i)=>s+=`<circle class="point ${key}" cx="${x(i)}" cy="${y(v)}" r="8" data-key="${key}" data-i="${i}" tabindex="0"/>`));s+=`<text class="delta" x="${(x(0)+x(1))/2}" y="${y(23.1)-18}" text-anchor="middle">典型订单 −7.1h</text><text class="delta" x="${(x(0)+x(1))/2}" y="${y(50.7)-18}" text-anchor="middle">慢订单 −14.9h</text>`;svg.innerHTML=s;let locked=null;
+function show(el,lock=false){const i=+el.dataset.i,key=el.dataset.key,val=key==='p50'?p50[i]:p90[i],box=el.getBoundingClientRect(),host=el.closest('.chart-panel').getBoundingClientRect();document.querySelectorAll('.point').forEach(d=>d.classList.remove('active'));el.classList.add('active');tip.innerHTML=`<small>${labels[i].replace('\n',' · ')}</small><b>${key==='p50'?'典型订单':'慢订单'} · ${val} 小时</b><span>已完成打包：${coverage[i]}%</span>`;tip.style.left=`${box.left-host.left+box.width/2}px`;tip.style.top=`${box.top-host.top}px`;tip.classList.add('show');if(lock)locked=el}
+document.querySelectorAll('.point').forEach(el=>{el.addEventListener('mouseenter',()=>show(el));el.addEventListener('focus',()=>show(el));el.addEventListener('click',e=>{e.stopPropagation();show(el,true)});el.addEventListener('mouseleave',()=>{if(locked!==el){el.classList.remove('active');tip.classList.remove('show')}})});document.addEventListener('click',()=>{locked=null;tip.classList.remove('show');document.querySelectorAll('.point').forEach(d=>d.classList.remove('active'))});
+</script>
+</body>
+</html>

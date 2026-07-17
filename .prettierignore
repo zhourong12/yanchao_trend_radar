@@ -1,0 +1,8 @@
+node_modules
+dist
+dist-server
+coverage
+data
+reports
+docs/project-intro
+package-lock.json

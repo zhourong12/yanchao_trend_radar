@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-server/
+coverage/
+screenshots/
+data/
+.env
+.env.*
+*.log
+*.bak
+*.tmp
+*.corrupt-*

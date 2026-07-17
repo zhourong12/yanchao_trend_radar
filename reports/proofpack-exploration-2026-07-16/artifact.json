@@ -1,0 +1,207 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "ProofPack（完工证据包）：独立项目探索",
+    "description": "面向小型安装、维修和维保团队的现场完工证据生成工具。",
+    "generatedAt": "2026-07-16T22:00:00+08:00",
+    "charts": [
+      {
+        "id": "direction_scores",
+        "title": "四个跨行业方向的加权评估",
+        "subtitle": "1–5 分探索判断，5 分最好；不代表市场实测结果",
+        "type": "bar",
+        "dataset": "direction_scores",
+        "sourceId": "research_notes",
+        "encodings": {
+          "x": { "field": "direction", "type": "nominal", "label": "候选方向" },
+          "y": { "field": "score", "type": "quantitative", "label": "加权分", "format": "number" }
+        },
+        "yAxisTitle": "加权分（满分 5）",
+        "valueFormat": "number",
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "direction_detail",
+        "title": "候选方向评分拆解",
+        "subtitle": "痛点、付费市场、MVP、数据独立性、用户可触达均为 1–5 分",
+        "dataset": "direction_detail",
+        "sourceId": "research_notes",
+        "defaultSort": { "field": "weighted_score", "direction": "desc" },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          { "field": "direction", "label": "方向", "type": "text" },
+          { "field": "pain", "label": "痛点频率", "format": "number" },
+          { "field": "paid_market", "label": "付费市场", "format": "number" },
+          { "field": "mvp_speed", "label": "MVP 速度", "format": "number" },
+          { "field": "independence", "label": "数据独立", "format": "number" },
+          { "field": "pilot_access", "label": "试点触达", "format": "number" },
+          { "field": "weighted_score", "label": "加权分", "format": "number" },
+          { "field": "decision", "label": "结论", "type": "text" }
+        ]
+      },
+      {
+        "id": "four_week_plan",
+        "title": "四周 MVP 计划",
+        "subtitle": "只验证证据采集、自动成稿和客户确认，不建设完整现场服务管理系统",
+        "dataset": "four_week_plan",
+        "sourceId": "research_notes",
+        "defaultSort": { "field": "week", "direction": "asc" },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          { "field": "week", "label": "周", "format": "number" },
+          { "field": "focus", "label": "重点", "type": "text" },
+          { "field": "deliverable", "label": "交付物", "type": "text" },
+          { "field": "gate", "label": "通过条件", "type": "text" }
+        ]
+      },
+      {
+        "id": "pilot_metrics",
+        "title": "试点继续/停止指标",
+        "subtitle": "门槛为本次探索假设，试点前需记录基线",
+        "dataset": "pilot_metrics",
+        "sourceId": "research_notes",
+        "defaultSort": { "field": "priority", "direction": "asc" },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          { "field": "metric", "label": "指标", "type": "text" },
+          { "field": "target", "label": "四周门槛", "type": "text" },
+          { "field": "reason", "label": "验证目的", "type": "text" },
+          { "field": "priority", "label": "优先级", "format": "number" }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "research_notes",
+        "label": "ProofPack 项目研究说明",
+        "path": "reports/proofpack-exploration-2026-07-16/source-notes.md",
+        "query": {
+          "engine": "mysql",
+          "language": "sql",
+          "description": "按固定权重计算四个候选项目的探索评分。",
+          "sql": "WITH inputs AS (SELECT 'ProofPack 完工证据包' AS direction, 5 AS pain, 5 AS paid_market, 5 AS mvp_speed, 4 AS independence, 3 AS pilot_access UNION ALL SELECT '合同义务与续约助手', 4, 5, 4, 3, 3 UNION ALL SELECT '中小企业票据对账助手', 5, 5, 3, 2, 3 UNION ALL SELECT '家庭保修与维护管家', 3, 2, 4, 5, 3) SELECT direction, ROUND(pain * 0.25 + paid_market * 0.20 + mvp_speed * 0.20 + independence * 0.20 + pilot_access * 0.15, 2) AS score FROM inputs ORDER BY score DESC",
+          "metric_definitions": {
+            "score": "五项 1–5 分探索评估的加权平均：痛点频率 25%、已有付费市场 20%、四周 MVP 速度 20%、数据/授权独立性 20%、试点用户可触达性 15%。"
+          }
+        }
+      },
+      { "id": "companycam", "label": "CompanyCam photo documentation", "href": "https://companycam.com/photo-documentation" },
+      { "id": "safetyculture", "label": "SafetyCulture pricing", "href": "https://safetyculture.com/pricing" },
+      { "id": "maintainx", "label": "MaintainX pricing", "href": "https://www.getmaintainx.com/pricing" },
+      { "id": "jobber", "label": "Jobber pricing", "href": "https://www.getjobber.com/pricing/" },
+      { "id": "bls", "label": "U.S. BLS installation, maintenance and repair outlook", "href": "https://www.bls.gov/ooh/installation-maintenance-and-repair/" }
+    ],
+    "blocks": [
+      { "id": "title", "type": "markdown", "body": "# ProofPack（完工证据包）：独立项目探索" },
+      {
+        "id": "executive_summary",
+        "type": "markdown",
+        "body": "## Executive Summary\n\n- **建议立项探索 ProofPack：一个完全独立于现有趋势雷达的项目。** 它服务 2–20 人的安装、维修和维保团队，让技师用照片和语音在三分钟内生成客户可确认、办公室可用于开票与归档的完工证据包。\n- **切口不是现场服务管理。** 不做排班、派单、库存、CRM 或支付，只做从现场材料到结构化交付物的最后一公里。\n- **付费行为已经存在。** CompanyCam、SafetyCulture、MaintainX 和 Jobber 都在销售现场记录、检查、工单或报告能力；这既验证需求，也意味着 MVP 必须更轻、更聚焦。\n- **四周目标不是上线大系统，而是完成 3 支队伍、30 个真实工单的试点，并拿到至少 2 个明确付费承诺。**"
+      },
+      {
+        "id": "why_now",
+        "type": "markdown",
+        "body": "## 痛点：活干完了，证据还散在手机、聊天和脑子里\n\n小型现场服务团队常用相册、群聊和语音传递施工过程。办公室要再次追问技师，才能整理完工说明、材料、遗留问题和客户确认；遇到付款、返工或保修争议时，还要从个人手机里翻证据。\n\n[CompanyCam 官方页面](https://companycam.com/photo-documentation)把按项目自动整理照片、前后对比和客户照片报告作为核心价值，并自报有 30,000+ 公司使用。该数字是厂商口径，不作为市场规模，但足以说明问题并非概念需求。[美国劳工统计局](https://www.bls.gov/ooh/installation-maintenance-and-repair/)还预计安装、维护和修理职业在 2024–2034 年的总体就业增长快于全部职业平均水平。"
+      },
+      {
+        "id": "paid_market",
+        "type": "markdown",
+        "body": "## 市场已付费，但完整套件不是进入方式\n\n[SafetyCulture 定价页](https://safetyculture.com/pricing)在核验时列出每席位每月 24 美元的年付 Premium 方案；[MaintainX](https://www.getmaintainx.com/pricing)销售包含工单、图片、签名和报告分享的分层产品；[Jobber](https://www.getjobber.com/pricing/)则覆盖排班、报价、开票和客户沟通。\n\n这些产品证明企业愿意为现场流程付费，也证明“再做一个 FSM/CMMS”没有合理胜算。ProofPack 的进入策略是零迁移：办公室发一个任务链接，技师无需学习完整系统，客户也无需注册。"
+      },
+      { "id": "direction_chart", "type": "chart", "chartId": "direction_scores", "layout": "full" },
+      { "id": "direction_table", "type": "table", "tableId": "direction_detail", "layout": "full" },
+      {
+        "id": "workflow",
+        "type": "markdown",
+        "body": "## 产品闭环：从现场采集到客户确认\n\n1. 办公室创建任务并发送网页链接或二维码。\n2. 技师按“施工前、施工中、施工后”拍照，口述做了什么、用了什么、还有什么未解决。\n3. AI 转写并提取工作内容、材料、异常和后续动作，提醒缺少关键照片或字段。\n4. 技师快速校对后生成带时间线、照片、签名和修改记录的 HTML/PDF 证据包。\n5. 客户通过链接确认或提出异议；办公室收到适合开票和归档的摘要。\n\n一期 AI 不判断施工质量，不识别安全合规，不宣称照片或签名具有法律效力。"
+      },
+      {
+        "id": "first_vertical",
+        "type": "markdown",
+        "body": "## 首个垂直场景：小型商用设备安装与维保\n\n首批只找空调、厨房设备、充电设施或类似商用设备的 2–20 人服务团队。它们通常有明确工单、现场照片、材料和客户验收，且一次服务的客单价足以支撑软件付费。\n\n不要同时覆盖建筑总包、保洁、园林和保险修复。垂直模板越多，四周试点越难判断到底是哪种价值生效。"
+      },
+      { "id": "mvp_plan", "type": "table", "tableId": "four_week_plan", "layout": "full" },
+      {
+        "id": "pricing",
+        "type": "markdown",
+        "body": "## 收费只测试两个变量\n\n试点后测试两档团队订阅假设：¥399/月（最多 5 人、100 份证据包）和 ¥899/月（最多 15 人、500 份证据包、品牌模板与导出）。同时保留 ¥9/份的按量方案作为对照。\n\n这些价格不是行业基准；只有用户在完成真实工单后愿意付款，才算验证。不要用“觉得有用”代替交易。"
+      },
+      { "id": "pilot_metrics", "type": "table", "tableId": "pilot_metrics", "layout": "full" },
+      {
+        "id": "risks",
+        "type": "markdown",
+        "body": "## 主要风险与防线\n\n- **现场采用失败**：采集流程超过三分钟就会被绕过；首版不要求安装 App。\n- **AI 写错事实**：所有生成字段必须由技师确认，原始语音和照片始终可追溯。\n- **隐私与客户场地照片**：任务创建时声明用途和保留期，支持遮挡、删除与最小权限。\n- **网络不稳定**：先实现断点续传；完整离线能力可在试点证明必要后再做。\n- **竞品复制或降价**：护城河不能是假想的 AI，而是特定垂直模板、低摩擦采集和客户确认闭环。"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## 现在就能执行的下一步\n\n1. 用 3 天访谈 8 位服务公司老板和 5 位技师，要求对方现场演示上一单如何整理完工材料。\n2. 收集 20 份脱敏后的真实完工报告、照片目录或聊天记录，先人工做出证据包样例。\n3. 第 1 周结束前确认首个垂直场景；若找不到 3 支愿意提供真实工单的队伍，停止开发。\n4. 四周只完成移动网页采集、语音转写、结构化草稿、客户确认和 PDF/HTML 导出。\n5. 第 4 周直接让试点客户选择付费档位；没有至少 2 个付费承诺就不进入第二阶段。"
+      },
+      {
+        "id": "caveats",
+        "type": "markdown",
+        "body": "## 不确定性\n\n本结论基于公开产品页和官方职业展望，尚未完成目标客户访谈、竞品试用或真实工单测试。厂商用户数量与功能陈述均按厂商口径引用。评分、价格和试点门槛是可证伪假设，不是已验证市场结论。"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-16T22:00:00+08:00",
+    "status": "ready",
+    "datasets": {
+      "direction_scores": [
+        { "direction": "ProofPack 完工证据包", "score": 4.5 },
+        { "direction": "合同义务与续约助手", "score": 3.85 },
+        { "direction": "中小企业票据对账助手", "score": 3.7 },
+        { "direction": "家庭保修与维护管家", "score": 3.4 }
+      ],
+      "direction_detail": [
+        { "direction": "ProofPack 完工证据包", "pain": 5, "paid_market": 5, "mvp_speed": 5, "independence": 4, "pilot_access": 3, "weighted_score": 4.5, "decision": "推荐，先验证现场采用" },
+        { "direction": "合同义务与续约助手", "pain": 4, "paid_market": 5, "mvp_speed": 4, "independence": 3, "pilot_access": 3, "weighted_score": 3.85, "decision": "竞争成熟，需更窄垂直" },
+        { "direction": "中小企业票据对账助手", "pain": 5, "paid_market": 5, "mvp_speed": 3, "independence": 2, "pilot_access": 3, "weighted_score": 3.7, "decision": "数据授权和准确率风险高" },
+        { "direction": "家庭保修与维护管家", "pain": 3, "paid_market": 2, "mvp_speed": 4, "independence": 5, "pilot_access": 3, "weighted_score": 3.4, "decision": "易做但付费意愿弱" }
+      ],
+      "four_week_plan": [
+        { "week": 1, "focus": "问题与样例", "deliverable": "13 次访谈、20 份脱敏材料、首个垂直模板", "gate": "至少 3 支队伍提供真实试点工单" },
+        { "week": 2, "focus": "现场采集", "deliverable": "任务链接、前中后照片、语音上传、断点续传", "gate": "技师中位采集时间不超过 3 分钟" },
+        { "week": 3, "focus": "证据成稿", "deliverable": "转写、字段提取、缺项提醒、校对、HTML/PDF", "gate": "80% 报告无需办公室重新录入" },
+        { "week": 4, "focus": "客户确认与付费", "deliverable": "客户确认页、30 个真实工单、三档价格测试", "gate": "至少 2 支队伍明确付费" }
+      ],
+      "pilot_metrics": [
+        { "metric": "真实试点覆盖", "target": "3 支队伍、30 个工单", "reason": "避免只测内部样例", "priority": 1 },
+        { "metric": "现场采集耗时", "target": "中位数 ≤3 分钟", "reason": "验证技师愿意持续使用", "priority": 2 },
+        { "metric": "办公室重复录入", "target": "≥80% 报告无需重录", "reason": "验证核心效率价值", "priority": 3 },
+        { "metric": "报告准备时间", "target": "相对基线下降 ≥50%", "reason": "量化可购买收益", "priority": 4 },
+        { "metric": "付费承诺", "target": "至少 2 支队伍", "reason": "决定是否继续建设", "priority": 5 }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "research_notes",
+      "label": "ProofPack 项目研究说明",
+      "path": "reports/proofpack-exploration-2026-07-16/source-notes.md",
+      "query": {
+        "engine": "mysql",
+        "language": "sql",
+        "description": "按固定权重计算四个候选项目的探索评分。",
+        "sql": "WITH inputs AS (SELECT 'ProofPack 完工证据包' AS direction, 5 AS pain, 5 AS paid_market, 5 AS mvp_speed, 4 AS independence, 3 AS pilot_access UNION ALL SELECT '合同义务与续约助手', 4, 5, 4, 3, 3 UNION ALL SELECT '中小企业票据对账助手', 5, 5, 3, 2, 3 UNION ALL SELECT '家庭保修与维护管家', 3, 2, 4, 5, 3) SELECT direction, ROUND(pain * 0.25 + paid_market * 0.20 + mvp_speed * 0.20 + independence * 0.20 + pilot_access * 0.15, 2) AS score FROM inputs ORDER BY score DESC",
+        "metric_definitions": {
+          "score": "五项 1–5 分探索评估的加权平均：痛点频率 25%、已有付费市场 20%、四周 MVP 速度 20%、数据/授权独立性 20%、试点用户可触达性 15%。"
+        }
+      }
+    },
+    { "id": "companycam", "label": "CompanyCam photo documentation", "href": "https://companycam.com/photo-documentation" },
+    { "id": "safetyculture", "label": "SafetyCulture pricing", "href": "https://safetyculture.com/pricing" },
+    { "id": "maintainx", "label": "MaintainX pricing", "href": "https://www.getmaintainx.com/pricing" },
+    { "id": "jobber", "label": "Jobber pricing", "href": "https://www.getjobber.com/pricing/" },
+    { "id": "bls", "label": "U.S. BLS installation, maintenance and repair outlook", "href": "https://www.bls.gov/ooh/installation-maintenance-and-repair/" }
+  ]
+}

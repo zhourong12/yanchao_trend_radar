@@ -1,0 +1,228 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "出海商品风险预检台：独立项目探索",
+    "description": "面向跨境采购和上架前风险初筛的独立新项目研究。",
+    "generatedAt": "2026-07-16T13:30:00+08:00",
+    "charts": [
+      {
+        "id": "direction_scores",
+        "title": "独立项目方向加权评估",
+        "subtitle": "1–5 分项目判断，5 分最好；不代表市场实测结果",
+        "type": "bar",
+        "dataset": "direction_scores",
+        "sourceId": "research_notes",
+        "encodings": {
+          "x": { "field": "direction", "type": "nominal", "label": "项目方向" },
+          "y": { "field": "score", "type": "quantitative", "label": "加权评估分", "format": "number" }
+        },
+        "yAxisTitle": "加权评估分（满分 5）",
+        "valueFormat": "number",
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "official_sources",
+        "title": "一期官方证据源",
+        "subtitle": "2026 年 7 月 16 日核验；记录量不等于可自动匹配 SKU 数量",
+        "dataset": "official_sources",
+        "sourceId": "research_notes",
+        "defaultSort": { "field": "priority", "direction": "asc" },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          { "field": "market", "label": "市场", "type": "text" },
+          { "field": "source", "label": "官方来源", "type": "text" },
+          { "field": "evidence", "label": "已核验证据", "type": "text" },
+          { "field": "mvp_use", "label": "MVP 用法", "type": "text" },
+          { "field": "priority", "label": "优先级", "format": "number" }
+        ]
+      },
+      {
+        "id": "direction_detail",
+        "title": "方向评分拆解",
+        "subtitle": "公开数据、差异化、MVP 速度、买方紧迫度和商业验证便利度均为 1–5 分",
+        "dataset": "direction_detail",
+        "sourceId": "research_notes",
+        "defaultSort": { "field": "weighted_score", "direction": "desc" },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          { "field": "direction", "label": "方向", "type": "text" },
+          { "field": "data_access", "label": "公开数据", "format": "number" },
+          { "field": "differentiation", "label": "差异化", "format": "number" },
+          { "field": "mvp_speed", "label": "MVP 速度", "format": "number" },
+          { "field": "urgency", "label": "紧迫度", "format": "number" },
+          { "field": "commercial_test", "label": "商业验证", "format": "number" },
+          { "field": "weighted_score", "label": "加权分", "format": "number" },
+          { "field": "decision", "label": "结论", "type": "text" }
+        ]
+      },
+      {
+        "id": "four_week_plan",
+        "title": "四周 MVP 交付计划",
+        "subtitle": "新建独立仓库；不改造或运行时依赖雁巢商品机会雷达",
+        "dataset": "four_week_plan",
+        "sourceId": "research_notes",
+        "defaultSort": { "field": "week", "direction": "asc" },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          { "field": "week", "label": "周", "format": "number" },
+          { "field": "focus", "label": "重点", "type": "text" },
+          { "field": "deliverable", "label": "可验收交付物", "type": "text" },
+          { "field": "gate", "label": "通过条件", "type": "text" }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "research_notes",
+        "label": "出海商品风险预检台研究说明",
+        "path": "reports/export-risk-preflight-exploration-2026-07-16/source-notes.md",
+        "query": {
+          "engine": "mysql",
+          "language": "sql",
+          "description": "根据已审核的五项项目评分和固定权重计算三个独立方向的加权分。",
+          "sql": "WITH inputs AS (SELECT '出海商品风险预检台' AS direction, 5 AS data_access, 4 AS differentiation, 4 AS mvp_speed, 4 AS urgency, 4 AS commercial_test UNION ALL SELECT '供应商履约风险档案', 2, 4, 2, 4, 3 UNION ALL SELECT '跨平台价格异常监控', 2, 3, 2, 4, 3) SELECT direction, ROUND(data_access * 0.25 + differentiation * 0.25 + mvp_speed * 0.20 + urgency * 0.15 + commercial_test * 0.15, 2) AS score FROM inputs ORDER BY score DESC",
+          "metric_definitions": {
+            "score": "五项 1–5 分项目评估的加权平均：公开数据 25%、差异化 25%、MVP 速度 20%、买方紧迫度 15%、商业验证便利度 15%。"
+          }
+        }
+      },
+      { "id": "eu_report", "label": "European Commission Safety Gate 2025 report", "href": "https://op.europa.eu/webpub/just/safety-gate-2025-report/en/" },
+      { "id": "cpsc_api", "label": "CPSC Recalls API information", "href": "https://www.cpsc.gov/Recalls/CPSC-Recalls-Application-Program-Interface-API-Information" },
+      { "id": "uk_recalls", "label": "UK Product Safety Alerts, Reports and Recalls", "href": "https://www.gov.uk/product-safety-alerts-reports-recalls?product_alert_type=product-recall" },
+      { "id": "gpsr", "label": "EUR-Lex General Product Safety Regulation summary", "href": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=legissum%3A4670517" }
+    ],
+    "blocks": [
+      { "id": "title", "type": "markdown", "body": "# 出海商品风险预检台：独立项目探索" },
+      {
+        "id": "executive_summary",
+        "type": "markdown",
+        "body": "## Executive Summary\n\n- **建议探索一个完全独立的新项目：出海商品风险预检台。** 它面向跨境卖家、采购团队、进口商和合规顾问，在采购或上架前，用官方历史召回证据识别相似危险模式并生成供应商追问清单。\n- **项目不依赖雁巢雷达。** 新建仓库、数据库、权限和部署；只复用团队已经掌握的 Adapter、标准化、证据链和风险表达经验。\n- **数据入口真实且可执行。** 欧盟 2025 年 Safety Gate 有 4,671 条警报，美国 CPSC 提供覆盖数十年的 JSON/XML API，英国公开召回页可搜索并订阅。\n- **产品必须避开普通召回监控。** 市场已有目录监控和告警产品；新项目的差异点是把风险识别前移到选品和采购阶段，并把结果转成可执行补证任务。"
+      },
+      {
+        "id": "problem",
+        "type": "markdown",
+        "body": "## 真正的问题发生在采购决定之前\n\n跨境团队通常在商品已经采购、上架或被平台问询后才去查召回和法规风险。官方数据库提供大量事实证据，但搜索入口按单个国家和单条公告组织，无法直接回答采购人员的三个问题：这个候选商品过去发生过什么类似事故、应该向供应商追问什么、缺少哪些证明材料。\n\n新项目的价值不是替代律师或实验室，而是把分散的官方事故记录转为采购前的证据简报和复核流程。"
+      },
+      {
+        "id": "data_scale",
+        "type": "markdown",
+        "body": "## 官方数据足以支撑第一版，但必须保留来源边界\n\n欧盟 [Safety Gate 2025 报告](https://op.europa.eu/webpub/just/safety-gate-2025-report/en/)记录 4,671 条危险产品警报和 5,794 项后续行动；官方还明确数据可在注明来源、提取日期和语言版本的条件下复用。美国 [CPSC Recall API](https://www.cpsc.gov/Recalls/CPSC-Recalls-Application-Program-Interface-API-Information) 提供 JSON/XML 机器可读接口，历史覆盖从 1973 年开始。英国 [OPSS 公开召回页](https://www.gov.uk/product-safety-alerts-reports-recalls?product_alert_type=product-recall) 在核验时显示 1,499 条产品召回报告并提供 feed。\n\n这些数字证明有足够历史案例用于检索，不证明每条记录都有 GTIN、型号或完整图片。模糊匹配必须显示理由并经过人工确认。"
+      },
+      { "id": "source_table", "type": "table", "tableId": "official_sources", "layout": "full" },
+      {
+        "id": "competition",
+        "type": "markdown",
+        "body": "## 普通召回监控已经拥挤，采购前预检才有差异\n\n公开产品页显示 RecallHunter、RecallRisk、RecallWatch AI、RecallDocket 和 Conformica 等产品已经在做官方召回库监控、目录匹配或 Shopify 合规工作流。欧盟自身也建设了 eSurveillance，用于发现 Safety Gate 中已被通报的产品是否仍在网上销售。\n\n因此，新项目不能只做“上传 SKU，收到召回邮件”。它应服务尚未采购或尚未上架的商品：寻找历史相似风险、拆解匹配证据、生成供应商问题和补证清单，并保存人工排除或升级的审计记录。"
+      },
+      {
+        "id": "direction_intro",
+        "type": "markdown",
+        "body": "## 三个独立方向中，风险预检最容易形成可信 MVP\n\n方向评分强调公开数据、差异化和四周交付能力。价格异常监控需要持续获得多平台价格，供应商履约档案需要长期积累真实交易结果；两者都容易在数据源阶段被卡住。风险预检的核心事实则来自可追溯的官方记录，团队可以先验证检索质量和用户付费意愿。"
+      },
+      { "id": "direction_chart", "type": "chart", "chartId": "direction_scores", "layout": "full" },
+      {
+        "id": "direction_detail_intro",
+        "type": "markdown",
+        "body": "### 评分拆解\n\n评分是当前决策假设。若后续获得稳定的跨平台价格授权或真实供应商履约数据，另外两个方向的优先级会变化；在现有约束下，不应靠抓取不稳定网页或自报数据伪造可执行性。"
+      },
+      { "id": "direction_table", "type": "table", "tableId": "direction_detail", "layout": "full" },
+      {
+        "id": "product_definition",
+        "type": "markdown",
+        "body": "## 产品是一份证据化采购预检，不是合规证书\n\n用户输入商品名称、品牌/型号、类目、目标市场，以及可选的 GTIN、规格、标签照片和供应商资料。系统返回相似官方召回 Top 5、危险模式、匹配证据拆解、供应商追问和待补材料。\n\n结果状态只能是“需复核、已排除、待补证、高度关注”。禁止输出“安全、已合规、可以上架”。没有命中时只能说明“当前已接入来源中未发现匹配证据”。"
+      },
+      {
+        "id": "architecture",
+        "type": "markdown",
+        "body": "## 独立架构保持证据可追溯\n\n新建独立仓库，核心对象包括官方警示、警示商品、风险分类、扫描请求、匹配证据、人工结论和证据简报。\n\n匹配优先级为：精确 GTIN/UPC，其次品牌+型号，再次制造商/供应商+类目，最后才是属性和语义相似。语义模型只负责召回候选，不能单独触发“高度关注”。每个结论必须能回到官方记录、提取时间和人工决定。"
+      },
+      {
+        "id": "mvp_plan_intro",
+        "type": "markdown",
+        "body": "## 四周只做能验证价值的最小闭环\n\n一期不接 Amazon 或 Shopify OAuth，不建设复杂订阅和多租户企业权限。先支持单品表单和 CSV，生成带官方证据的 HTML 简报，并用 10 位真实目标用户和 30 个候选商品验证是否改变采购动作。"
+      },
+      { "id": "mvp_plan", "type": "table", "tableId": "four_week_plan", "layout": "full" },
+      {
+        "id": "success",
+        "type": "markdown",
+        "body": "## 用技术和付费双门槛决定是否继续\n\n**技术门槛**：在 100 条历史标注样本上，相关召回进入 Top 5 的比例至少 85%；“高度关注”必须有精确标识符或两个独立强证据，人工复核后的误报率不高于 10%。\n\n**商业门槛**：10 位目标用户完成至少 30 个真实商品扫描；至少 6 位认为简报改变了追问、补证或放弃决定；至少 3 位愿意购买下一份简报或签署付费试用意向。\n\n这些是探索项目的继续/停止规则，不是已验证行业基准。"
+      },
+      {
+        "id": "pricing",
+        "type": "markdown",
+        "body": "## 先卖人工复核简报，再决定是否做订阅\n\n第一阶段提供免费基础预览，并对人工复核简报测试 ¥299、¥599、¥999 三档价格。只有证明用户愿意为采购前判断付费，才建设批量扫描、持续监控、多人复核和审计导出。\n\n这个顺序能避免先做一个功能完整但没有购买者的合规平台。"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## 推荐下一步\n\n1. 以独立项目立项，不继续修改雁巢雷达。\n2. 首期聚焦两个高风险类目：儿童/玩具，以及带锂电的小型电子产品。\n3. 找 5–10 位跨境卖家、采购或合规顾问做问题访谈，并收集 30 个真实候选商品。\n4. 先搭 CPSC 与 EU Safety Gate 数据集和 100 条标注评测集；检索质量不过门槛就停止，不用界面掩盖匹配问题。\n5. 第 4 周直接测试付费简报，而不是只询问“你会不会用”。"
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## 开工前需要确认\n\n- 首批用户更接近跨境卖家、采购公司，还是合规顾问？三者的简报深度和收费方式不同。\n- 首期是否接受用户上传包装和标签照片？接受后会提高匹配质量，也会增加文件安全和保留期要求。\n- 是否有现成的 20–30 个真实采购候选可用于试点？如果没有，商业验证会比技术实现更慢。"
+      },
+      {
+        "id": "caveats",
+        "type": "markdown",
+        "body": "## 边界与不确定性\n\n- 本报告验证了公开数据入口和竞品公开页面，没有运行竞品试用，也没有完成客户访谈，因此推荐仍是探索性结论。\n- 4,671 和 1,499 是官方警报/报告规模，不是市场规模、客户数量或可匹配 SKU 数量。\n- 法规和接口会更新；正式产品必须记录来源版本和提取时间，并在具体法律义务上链接当前官方文本。\n- 项目只做风险初筛和工作流，不替代实验室测试、专业合规审查或法律意见。"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-16T13:30:00+08:00",
+    "status": "ready",
+    "datasets": {
+      "direction_scores": [
+        { "direction": "出海商品风险预检台", "score": 4.25 },
+        { "direction": "供应商履约风险档案", "score": 2.95 },
+        { "direction": "跨平台价格异常监控", "score": 2.7 }
+      ],
+      "official_sources": [
+        { "market": "EU/EEA", "source": "Safety Gate", "evidence": "2025 年 4,671 条警报；5,794 项后续行动；允许注明来源后复用", "mvp_use": "自动导入历史与新增危险产品警报", "priority": 1 },
+        { "market": "US", "source": "CPSC Recall API", "evidence": "公开 REST；JSON/XML；历史从 1973 年开始", "mvp_use": "自动采集品牌、型号、危险、措施和标识符", "priority": 2 },
+        { "market": "UK", "source": "OPSS alerts/recalls", "evidence": "核验时 Product recall 过滤为 1,499 条；提供 feed", "mvp_use": "一期采集公开召回与安全报告", "priority": 3 },
+        { "market": "AU", "source": "ACCC Product Safety", "evidence": "官方召回搜索可用；结构化出口仍需验证", "mvp_use": "一期人工核验，二期评估自动接入", "priority": 4 }
+      ],
+      "direction_detail": [
+        { "direction": "出海商品风险预检台", "data_access": 5, "differentiation": 4, "mvp_speed": 4, "urgency": 4, "commercial_test": 4, "weighted_score": 4.25, "decision": "推荐探索" },
+        { "direction": "供应商履约风险档案", "data_access": 2, "differentiation": 4, "mvp_speed": 2, "urgency": 4, "commercial_test": 3, "weighted_score": 2.95, "decision": "需先有交易数据" },
+        { "direction": "跨平台价格异常监控", "data_access": 2, "differentiation": 3, "mvp_speed": 2, "urgency": 4, "commercial_test": 3, "weighted_score": 2.7, "decision": "数据授权后再评估" }
+      ],
+      "four_week_plan": [
+        { "week": 1, "focus": "官方数据底座", "deliverable": "独立仓库、数据模型、CPSC Adapter、EU 数据导入、原始证据页", "gate": "记录可去重、可追溯、无 Seed 回退" },
+        { "week": 2, "focus": "匹配与评测", "deliverable": "风险分类、精确/模糊检索、100 条标注集", "gate": "Top 5 召回率达到 85%" },
+        { "week": 3, "focus": "用户工作流", "deliverable": "单品扫描、CSV、证据拆解、人工复核、HTML 简报", "gate": "任何结论可回到官方证据" },
+        { "week": 4, "focus": "商业试点", "deliverable": "10 位用户、30 个商品、三档价格测试", "gate": "至少 3 个付费或付费试用意向" }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "research_notes",
+      "label": "出海商品风险预检台研究说明",
+      "path": "reports/export-risk-preflight-exploration-2026-07-16/source-notes.md",
+      "query": {
+        "engine": "mysql",
+        "language": "sql",
+        "description": "根据已审核的五项项目评分和固定权重计算三个独立方向的加权分。",
+        "sql": "WITH inputs AS (SELECT '出海商品风险预检台' AS direction, 5 AS data_access, 4 AS differentiation, 4 AS mvp_speed, 4 AS urgency, 4 AS commercial_test UNION ALL SELECT '供应商履约风险档案', 2, 4, 2, 4, 3 UNION ALL SELECT '跨平台价格异常监控', 2, 3, 2, 4, 3) SELECT direction, ROUND(data_access * 0.25 + differentiation * 0.25 + mvp_speed * 0.20 + urgency * 0.15 + commercial_test * 0.15, 2) AS score FROM inputs ORDER BY score DESC",
+        "metric_definitions": {
+          "score": "五项 1–5 分项目评估的加权平均：公开数据 25%、差异化 25%、MVP 速度 20%、买方紧迫度 15%、商业验证便利度 15%。"
+        }
+      }
+    },
+    { "id": "eu_report", "label": "European Commission Safety Gate 2025 report", "href": "https://op.europa.eu/webpub/just/safety-gate-2025-report/en/" },
+    { "id": "cpsc_api", "label": "CPSC Recalls API information", "href": "https://www.cpsc.gov/Recalls/CPSC-Recalls-Application-Program-Interface-API-Information" },
+    { "id": "uk_recalls", "label": "UK Product Safety Alerts, Reports and Recalls", "href": "https://www.gov.uk/product-safety-alerts-reports-recalls?product_alert_type=product-recall" },
+    { "id": "gpsr", "label": "EUR-Lex General Product Safety Regulation summary", "href": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=legissum%3A4670517" }
+  ]
+}

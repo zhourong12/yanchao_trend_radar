@@ -1,0 +1,305 @@
+﻿[
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "id", "DATA_TYPE": "int", "COLUMN_KEY": "PRI" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "coupon_rule_id", "DATA_TYPE": "int", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "sn", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "user_id", "DATA_TYPE": "int", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "getway", "DATA_TYPE": "tinyint", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "usetype", "DATA_TYPE": "tinyint", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "createtime", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "endtime", "DATA_TYPE": "int", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "updatetime", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "money", "DATA_TYPE": "decimal", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "status", "DATA_TYPE": "enum", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "is_push", "DATA_TYPE": "tinyint", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "give_reason", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "admin_name", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "coupon_activity_id", "DATA_TYPE": "int", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "is_push_7day", "DATA_TYPE": "tinyint", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "user_membership_order_id", "DATA_TYPE": "int", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "used_user_id", "DATA_TYPE": "int", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_coupon", "COLUMN_NAME": "code", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "title", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "create_time", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "count", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "end_time", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "views", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "inside_url", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "outside_url", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "applet_url", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "status", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "coupon_rule_ids", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "image_url", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  {
+    "TABLE_NAME": "ob_coupon_activity",
+    "COLUMN_NAME": "web_header_image_url",
+    "DATA_TYPE": "varchar",
+    "COLUMN_KEY": ""
+  },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "detail", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "uses_total", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "id", "DATA_TYPE": "int", "COLUMN_KEY": "PRI" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "admin_name", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "is_forward", "DATA_TYPE": "tinyint", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "type", "DATA_TYPE": "tinyint", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "is_new_limit", "DATA_TYPE": "tinyint", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "price", "DATA_TYPE": "decimal", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "qw_code", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "qw_detail", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "activity_code", "DATA_TYPE": "varchar", "COLUMN_KEY": "UNI" },
+  { "TABLE_NAME": "ob_coupon_activity", "COLUMN_NAME": "dialog_jump_url", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "id", "DATA_TYPE": "int", "COLUMN_KEY": "PRI" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "coupon_rule_ids", "DATA_TYPE": "varchar", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "name", "DATA_TYPE": "varchar", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "content", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "image", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "url", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "end_time", "DATA_TYPE": "datetime", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "remark", "DATA_TYPE": "varchar", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "update_time", "DATA_TYPE": "datetime", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "create_time", "DATA_TYPE": "datetime", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "applet_url", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "out_side_url", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "inside_url", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  {
+    "TABLE_NAME": "ob_invite_activity",
+    "COLUMN_NAME": "register_rewards_type",
+    "DATA_TYPE": "tinyint",
+    "COLUMN_KEY": ""
+  },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "order_rewards_type", "DATA_TYPE": "tinyint", "COLUMN_KEY": "" },
+  {
+    "TABLE_NAME": "ob_invite_activity",
+    "COLUMN_NAME": "register_rewards_red_envelope_amount",
+    "DATA_TYPE": "decimal",
+    "COLUMN_KEY": ""
+  },
+  {
+    "TABLE_NAME": "ob_invite_activity",
+    "COLUMN_NAME": "order_rewards_red_envelope_amount",
+    "DATA_TYPE": "decimal",
+    "COLUMN_KEY": ""
+  },
+  {
+    "TABLE_NAME": "ob_invite_activity",
+    "COLUMN_NAME": "order_rewards_coupon_rule_ids",
+    "DATA_TYPE": "varchar",
+    "COLUMN_KEY": ""
+  },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "bg_url", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  {
+    "TABLE_NAME": "ob_invite_activity",
+    "COLUMN_NAME": "black_country_codes",
+    "DATA_TYPE": "varchar",
+    "COLUMN_KEY": ""
+  },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "order_rewards_num", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "register_rewards_num", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  {
+    "TABLE_NAME": "ob_invite_activity",
+    "COLUMN_NAME": "inviter_rewards_max_times",
+    "DATA_TYPE": "int",
+    "COLUMN_KEY": ""
+  },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "gonest_url", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "web_image", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "code", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "role_id", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_invite_activity", "COLUMN_NAME": "official_code", "DATA_TYPE": "varchar", "COLUMN_KEY": "MUL" },
+  {
+    "TABLE_NAME": "ob_invite_activity",
+    "COLUMN_NAME": "official_applet_url",
+    "DATA_TYPE": "varchar",
+    "COLUMN_KEY": ""
+  },
+  { "TABLE_NAME": "ob_user_coupon_activity_order", "COLUMN_NAME": "id", "DATA_TYPE": "bigint", "COLUMN_KEY": "PRI" },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "user_id",
+    "DATA_TYPE": "bigint",
+    "COLUMN_KEY": "MUL"
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "coupon_activity_id",
+    "DATA_TYPE": "bigint",
+    "COLUMN_KEY": "MUL"
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "order_no",
+    "DATA_TYPE": "varchar",
+    "COLUMN_KEY": ""
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "order_status",
+    "DATA_TYPE": "tinyint",
+    "COLUMN_KEY": "MUL"
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "payment_amount",
+    "DATA_TYPE": "decimal",
+    "COLUMN_KEY": ""
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "payment_time",
+    "DATA_TYPE": "datetime",
+    "COLUMN_KEY": ""
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "payment_method",
+    "DATA_TYPE": "tinyint",
+    "COLUMN_KEY": ""
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "third_sn",
+    "DATA_TYPE": "varchar",
+    "COLUMN_KEY": "MUL"
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "order_id",
+    "DATA_TYPE": "varchar",
+    "COLUMN_KEY": "MUL"
+  },
+  { "TABLE_NAME": "ob_user_coupon_activity_order", "COLUMN_NAME": "remark", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "create_time",
+    "DATA_TYPE": "datetime",
+    "COLUMN_KEY": "MUL"
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "update_time",
+    "DATA_TYPE": "datetime",
+    "COLUMN_KEY": ""
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "is_del",
+    "DATA_TYPE": "tinyint",
+    "COLUMN_KEY": "MUL"
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "currency",
+    "DATA_TYPE": "varchar",
+    "COLUMN_KEY": ""
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "platform_type",
+    "DATA_TYPE": "tinyint",
+    "COLUMN_KEY": "MUL"
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "balance_amount",
+    "DATA_TYPE": "decimal",
+    "COLUMN_KEY": ""
+  },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "balance_order_id",
+    "DATA_TYPE": "varchar",
+    "COLUMN_KEY": ""
+  },
+  { "TABLE_NAME": "ob_user_coupon_activity_order", "COLUMN_NAME": "rate", "DATA_TYPE": "decimal", "COLUMN_KEY": "" },
+  {
+    "TABLE_NAME": "ob_user_coupon_activity_order",
+    "COLUMN_NAME": "actual_amount",
+    "DATA_TYPE": "decimal",
+    "COLUMN_KEY": ""
+  },
+  { "TABLE_NAME": "ob_user_invite", "COLUMN_NAME": "id", "DATA_TYPE": "bigint", "COLUMN_KEY": "PRI" },
+  { "TABLE_NAME": "ob_user_invite", "COLUMN_NAME": "user_id", "DATA_TYPE": "int", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_user_invite", "COLUMN_NAME": "reg_user_id", "DATA_TYPE": "int", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_user_invite", "COLUMN_NAME": "regemail", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_user_invite", "COLUMN_NAME": "regip", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_user_invite", "COLUMN_NAME": "regtime", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_user_invite", "COLUMN_NAME": "successtime", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_user_invite", "COLUMN_NAME": "createtime", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_user_invite", "COLUMN_NAME": "status", "DATA_TYPE": "tinyint", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "id", "DATA_TYPE": "int", "COLUMN_KEY": "PRI" },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "sn", "DATA_TYPE": "varchar", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "create_time", "DATA_TYPE": "datetime", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "user_id", "DATA_TYPE": "int", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "type", "DATA_TYPE": "tinyint", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "reason", "DATA_TYPE": "varchar", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "amount", "DATA_TYPE": "decimal", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "after_money", "DATA_TYPE": "decimal", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "admin_name", "DATA_TYPE": "varchar", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "status", "DATA_TYPE": "tinyint", "COLUMN_KEY": "MUL" },
+  {
+    "TABLE_NAME": "ob_user_red_envelope",
+    "COLUMN_NAME": "validity_time",
+    "DATA_TYPE": "datetime",
+    "COLUMN_KEY": "MUL"
+  },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "remain_amount", "DATA_TYPE": "decimal", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "del_admin_name", "DATA_TYPE": "varchar", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "is_del", "DATA_TYPE": "tinyint", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_user_red_envelope", "COLUMN_NAME": "del_time", "DATA_TYPE": "datetime", "COLUMN_KEY": "" },
+  {
+    "TABLE_NAME": "ob_user_red_envelope",
+    "COLUMN_NAME": "expire_push_status",
+    "DATA_TYPE": "tinyint",
+    "COLUMN_KEY": ""
+  },
+  {
+    "TABLE_NAME": "ob_user_red_envelope",
+    "COLUMN_NAME": "expire_push_time",
+    "DATA_TYPE": "datetime",
+    "COLUMN_KEY": ""
+  },
+  { "TABLE_NAME": "ob_user_red_envelope_detail", "COLUMN_NAME": "id", "DATA_TYPE": "int", "COLUMN_KEY": "PRI" },
+  {
+    "TABLE_NAME": "ob_user_red_envelope_detail",
+    "COLUMN_NAME": "red_envelope_id",
+    "DATA_TYPE": "int",
+    "COLUMN_KEY": "MUL"
+  },
+  {
+    "TABLE_NAME": "ob_user_red_envelope_detail",
+    "COLUMN_NAME": "sendorder_sn",
+    "DATA_TYPE": "varchar",
+    "COLUMN_KEY": "MUL"
+  },
+  { "TABLE_NAME": "ob_user_red_envelope_detail", "COLUMN_NAME": "amount", "DATA_TYPE": "decimal", "COLUMN_KEY": "" },
+  {
+    "TABLE_NAME": "ob_user_red_envelope_detail",
+    "COLUMN_NAME": "create_time",
+    "DATA_TYPE": "datetime",
+    "COLUMN_KEY": ""
+  },
+  { "TABLE_NAME": "ob_user_red_envelope_detail", "COLUMN_NAME": "type", "DATA_TYPE": "tinyint", "COLUMN_KEY": "MUL" },
+  {
+    "TABLE_NAME": "ob_user_red_envelope_detail",
+    "COLUMN_NAME": "sendorder_id",
+    "DATA_TYPE": "int",
+    "COLUMN_KEY": "MUL"
+  },
+  { "TABLE_NAME": "ob_warehouse_log", "COLUMN_NAME": "id", "DATA_TYPE": "int", "COLUMN_KEY": "PRI" },
+  { "TABLE_NAME": "ob_warehouse_log", "COLUMN_NAME": "mark_no", "DATA_TYPE": "varchar", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_warehouse_log", "COLUMN_NAME": "type", "DATA_TYPE": "int", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_warehouse_log", "COLUMN_NAME": "message", "DATA_TYPE": "longtext", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_warehouse_log", "COLUMN_NAME": "admin_id", "DATA_TYPE": "int", "COLUMN_KEY": "" },
+  { "TABLE_NAME": "ob_warehouse_log", "COLUMN_NAME": "created_time", "DATA_TYPE": "int", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_warehouse_log", "COLUMN_NAME": "user_id", "DATA_TYPE": "int", "COLUMN_KEY": "MUL" },
+  {
+    "TABLE_NAME": "ob_warehouse_log",
+    "COLUMN_NAME": "sendorder_expressno",
+    "DATA_TYPE": "varchar",
+    "COLUMN_KEY": "MUL"
+  },
+  { "TABLE_NAME": "ob_warehouse_log", "COLUMN_NAME": "is_test", "DATA_TYPE": "int", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_warehouse_log", "COLUMN_NAME": "express_no", "DATA_TYPE": "varchar", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_warehouse_log", "COLUMN_NAME": "sendorder_sn", "DATA_TYPE": "varchar", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_warehouse_log", "COLUMN_NAME": "express_no_del", "DATA_TYPE": "tinyint", "COLUMN_KEY": "MUL" },
+  { "TABLE_NAME": "ob_warehouse_log", "COLUMN_NAME": "order_weight", "DATA_TYPE": "decimal", "COLUMN_KEY": "" }
+]
