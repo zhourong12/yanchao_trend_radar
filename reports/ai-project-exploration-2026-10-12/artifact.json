@@ -1,0 +1,469 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "AI 项目再探索：商品理解层",
+    "description": "延续 2026-07-16 三份探索，按 AI 项目框架重评 11 个方向，推荐以集运商品理解层为底座，一期做雷达的一方购买信号，二期做申报与敏感货预检。",
+    "generatedAt": "2026-10-12T18:00:00+08:00",
+    "charts": [
+      {
+        "id": "direction_scores",
+        "title": "11 个方向的加权评估",
+        "subtitle": "1–5 分探索判断，5 分最好；不代表市场实测结果",
+        "type": "bar",
+        "dataset": "direction_scores",
+        "sourceId": "research_notes",
+        "encodings": {
+          "x": {
+            "field": "direction",
+            "type": "nominal",
+            "label": "候选方向"
+          },
+          "y": {
+            "field": "score",
+            "type": "quantitative",
+            "label": "加权分",
+            "format": "number"
+          }
+        },
+        "yAxisTitle": "加权分（满分 5）",
+        "valueFormat": "number",
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "direction_detail",
+        "title": "候选方向评分拆解",
+        "subtitle": "自有数据、业务价值、AI 必要性、4 周 MVP、错误可控均为 1–5 分",
+        "dataset": "direction_detail",
+        "sourceId": "research_notes",
+        "defaultSort": {
+          "field": "weighted_score",
+          "direction": "desc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "direction",
+            "label": "方向",
+            "type": "text"
+          },
+          {
+            "field": "tier",
+            "label": "层级",
+            "type": "text"
+          },
+          {
+            "field": "own_data",
+            "label": "自有数据",
+            "format": "number"
+          },
+          {
+            "field": "business_value",
+            "label": "业务价值",
+            "format": "number"
+          },
+          {
+            "field": "ai_necessity",
+            "label": "AI 必要性",
+            "format": "number"
+          },
+          {
+            "field": "mvp_speed",
+            "label": "MVP 速度",
+            "format": "number"
+          },
+          {
+            "field": "error_control",
+            "label": "错误可控",
+            "format": "number"
+          },
+          {
+            "field": "weighted_score",
+            "label": "加权分",
+            "format": "number"
+          },
+          {
+            "field": "decision",
+            "label": "结论",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "four_week_plan",
+        "title": "四周 MVP 计划",
+        "subtitle": "只读、聚合、内部使用；申报预检仅影子模式",
+        "dataset": "four_week_plan",
+        "sourceId": "research_notes",
+        "defaultSort": {
+          "field": "week",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "week",
+            "label": "周",
+            "format": "number"
+          },
+          {
+            "field": "focus",
+            "label": "重点",
+            "type": "text"
+          },
+          {
+            "field": "deliverable",
+            "label": "交付物",
+            "type": "text"
+          },
+          {
+            "field": "gate",
+            "label": "通过条件",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "pilot_gates",
+        "title": "继续/停止门槛",
+        "subtitle": "门槛为本次探索假设，首轮后按国家和品类重新校准",
+        "dataset": "pilot_gates",
+        "sourceId": "research_notes",
+        "defaultSort": {
+          "field": "priority",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "metric",
+            "label": "指标",
+            "type": "text"
+          },
+          {
+            "field": "target",
+            "label": "门槛",
+            "type": "text"
+          },
+          {
+            "field": "if_missed",
+            "label": "未达标时",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-10-12T18:00:00+08:00",
+    "status": "ready",
+    "datasets": {
+      "direction_scores": [
+        {
+          "direction": "雁巢用户购买信号",
+          "score": 4.4
+        },
+        {
+          "direction": "申报与敏感货 AI 预检",
+          "score": 4.3
+        },
+        {
+          "direction": "到仓前重量与运费预估",
+          "score": 4.1
+        },
+        {
+          "direction": "LLM 热点→商品意图映射",
+          "score": 3.6
+        },
+        {
+          "direction": "口径守卫型经营分析 Agent",
+          "score": 3.6
+        },
+        {
+          "direction": "入库 QC 视觉比对",
+          "score": 3.5
+        },
+        {
+          "direction": "券与红包增益模型",
+          "score": 3.5
+        },
+        {
+          "direction": "“能不能寄”多语言问答 Agent",
+          "score": 3.45
+        },
+        {
+          "direction": "出海商品风险预检台（7/16）",
+          "score": 3.15
+        },
+        {
+          "direction": "ProofPack 完工证据包（7/16）",
+          "score": 3.0
+        },
+        {
+          "direction": "雁巢需求实验室（7/16）",
+          "score": 2.6
+        }
+      ],
+      "direction_detail": [
+        {
+          "direction": "雁巢用户购买信号",
+          "tier": "雷达",
+          "own_data": 5,
+          "business_value": 4,
+          "ai_necessity": 4,
+          "mvp_speed": 4,
+          "error_control": 5,
+          "weighted_score": 4.4,
+          "decision": "一期推荐"
+        },
+        {
+          "direction": "申报与敏感货 AI 预检",
+          "tier": "集运主业",
+          "own_data": 5,
+          "business_value": 5,
+          "ai_necessity": 5,
+          "mvp_speed": 3,
+          "error_control": 3,
+          "weighted_score": 4.3,
+          "decision": "二期推荐，先影子模式"
+        },
+        {
+          "direction": "到仓前重量与运费预估",
+          "tier": "集运主业",
+          "own_data": 5,
+          "business_value": 4,
+          "ai_necessity": 3,
+          "mvp_speed": 4,
+          "error_control": 4,
+          "weighted_score": 4.1,
+          "decision": "复用商品理解特征"
+        },
+        {
+          "direction": "LLM 热点→商品意图映射",
+          "tier": "雷达",
+          "own_data": 2,
+          "business_value": 3,
+          "ai_necessity": 5,
+          "mvp_speed": 5,
+          "error_control": 4,
+          "weighted_score": 3.6,
+          "decision": "等一方购买信号上线后做"
+        },
+        {
+          "direction": "口径守卫型经营分析 Agent",
+          "tier": "内部效率",
+          "own_data": 4,
+          "business_value": 3,
+          "ai_necessity": 4,
+          "mvp_speed": 4,
+          "error_control": 3,
+          "weighted_score": 3.6,
+          "decision": "可并行小试"
+        },
+        {
+          "direction": "入库 QC 视觉比对",
+          "tier": "集运主业",
+          "own_data": 3,
+          "business_value": 4,
+          "ai_necessity": 5,
+          "mvp_speed": 2,
+          "error_control": 4,
+          "weighted_score": 3.5,
+          "decision": "需先确认质检照片留存"
+        },
+        {
+          "direction": "券与红包增益模型",
+          "tier": "增长",
+          "own_data": 4,
+          "business_value": 4,
+          "ai_necessity": 2,
+          "mvp_speed": 3,
+          "error_control": 4,
+          "weighted_score": 3.5,
+          "decision": "先做随机留存组"
+        },
+        {
+          "direction": "“能不能寄”多语言问答 Agent",
+          "tier": "集运主业",
+          "own_data": 3,
+          "business_value": 4,
+          "ai_necessity": 4,
+          "mvp_speed": 4,
+          "error_control": 2,
+          "weighted_score": 3.45,
+          "decision": "依赖商品理解层后再做"
+        },
+        {
+          "direction": "出海商品风险预检台（7/16）",
+          "tier": "独立产品",
+          "own_data": 3,
+          "business_value": 3,
+          "ai_necessity": 4,
+          "mvp_speed": 3,
+          "error_control": 3,
+          "weighted_score": 3.15,
+          "decision": "可并入二期合规模块"
+        },
+        {
+          "direction": "ProofPack 完工证据包（7/16）",
+          "tier": "独立产品",
+          "own_data": 1,
+          "business_value": 3,
+          "ai_necessity": 4,
+          "mvp_speed": 4,
+          "error_control": 4,
+          "weighted_score": 3.0,
+          "decision": "与团队资产无关"
+        },
+        {
+          "direction": "雁巢需求实验室（7/16）",
+          "tier": "雷达",
+          "own_data": 2,
+          "business_value": 3,
+          "ai_necessity": 1,
+          "mvp_speed": 3,
+          "error_control": 4,
+          "weighted_score": 2.6,
+          "decision": "非 AI，且依赖投放授权"
+        }
+      ],
+      "four_week_plan": [
+        {
+          "week": 1,
+          "focus": "数据体检与金标",
+          "deliverable": "只读查询标题、图片、AI 标签、国家和处理结果的填充率；隐私设计；300 件分层抽样金标；现有 AI 标签基线",
+          "gate": "可用标题或图片 ≥70%；金标双人一致率 ≥90%"
+        },
+        {
+          "week": 2,
+          "focus": "商品理解 v0",
+          "deliverable": "文本优先、低置信再看图；批处理最近 4 周；评测报告；单件成本与延迟实测",
+          "gate": "达到准确率门槛，并优于现有 AI 标签"
+        },
+        {
+          "week": 3,
+          "focus": "一方购买信号接入雷达",
+          "deliverable": "聚合快照、带 run_id 的 Adapter、机会证据卡、k≥5 门槛、样本偏差标注",
+          "gate": "至少 10 个机会获得一方购买证据"
+        },
+        {
+          "week": 4,
+          "focus": "回测与影子对比",
+          "deliverable": "8 周回测（雷达品类 vs 一方购买变化）；200 件申报建议影子对比；继续/停止评审",
+          "gate": "至少 1 个跟进或放弃决策因此改变"
+        }
+      ],
+      "pilot_gates": [
+        {
+          "metric": "数据可用率",
+          "target": "≥70% 商品有可用标题或图片",
+          "if_missed": "先改入库信息采集，暂停建模",
+          "priority": 1
+        },
+        {
+          "metric": "二级品类准确率",
+          "target": "金标 Top-1 ≥90%（大类 ≥95%）",
+          "if_missed": "缩减类目或补少样本示例",
+          "priority": 2
+        },
+        {
+          "metric": "敏感属性召回",
+          "target": "电池、液体、磁性、粉末、刀具召回 ≥95%，精确率 ≥70%",
+          "if_missed": "不进入二期申报预检",
+          "priority": 3
+        },
+        {
+          "metric": "相对现有 AI 标签",
+          "target": "在同一金标上明显更好",
+          "if_missed": "现有标签已达标则停止重造，直接消费现有标签",
+          "priority": 4
+        },
+        {
+          "metric": "影子采纳率",
+          "target": "仓库无修改采纳 ≥80%",
+          "if_missed": "只保留敏感货提示，不做申报建议",
+          "priority": 5
+        },
+        {
+          "metric": "业务影响",
+          "target": "≥10 个机会获得一方证据，≥1 个决策改变",
+          "if_missed": "一方信号降为辅助视图",
+          "priority": 6
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "research_notes",
+      "label": "AI 项目再探索研究说明",
+      "path": "reports/ai-project-exploration-2026-10-12/source-notes.md",
+      "query": {
+        "engine": "mysql",
+        "language": "sql",
+        "description": "按固定权重计算 11 个候选方向的探索评分。",
+        "sql": "WITH inputs AS (SELECT '雁巢用户购买信号' AS direction, 5 AS own_data, 4 AS business_value, 4 AS ai_necessity, 4 AS mvp_speed, 5 AS error_control UNION ALL SELECT '申报与敏感货 AI 预检', 5, 5, 5, 3, 3 UNION ALL SELECT '到仓前重量与运费预估', 5, 4, 3, 4, 4 UNION ALL SELECT 'LLM 热点→商品意图映射', 2, 3, 5, 5, 4 UNION ALL SELECT '口径守卫型经营分析 Agent', 4, 3, 4, 4, 3 UNION ALL SELECT '入库 QC 视觉比对', 3, 4, 5, 2, 4 UNION ALL SELECT '券与红包增益模型', 4, 4, 2, 3, 4 UNION ALL SELECT '“能不能寄”多语言问答 Agent', 3, 4, 4, 4, 2 UNION ALL SELECT '出海商品风险预检台（7/16）', 3, 3, 4, 3, 3 UNION ALL SELECT 'ProofPack 完工证据包（7/16）', 1, 3, 4, 4, 4 UNION ALL SELECT '雁巢需求实验室（7/16）', 2, 3, 1, 3, 4) SELECT direction, ROUND(own_data * 0.25 + business_value * 0.25 + ai_necessity * 0.15 + mvp_speed * 0.20 + error_control * 0.15, 2) AS score FROM inputs ORDER BY score DESC",
+        "metric_definitions": {
+          "score": "五项 1–5 分探索评估的加权平均：自有数据与结果标签 25%、可量化业务价值 25%、AI 必要性 15%、4 周 MVP 可行性 20%、错误可控 15%。"
+        }
+      }
+    },
+    {
+      "id": "schema_inspection",
+      "label": "集运主库字段结构（仅字段名，无业务数据）",
+      "path": "reports/schema-inspection.json"
+    },
+    {
+      "id": "overall_audit",
+      "label": "2026-07-16 雷达整体审核",
+      "path": "reports/overall-audit-2026-07-16/query-notes.md"
+    },
+    {
+      "id": "weekly_dashboard",
+      "label": "2026-07-10 周会转化漏斗",
+      "path": "reports/weekly-dashboard-2026-07-10.html"
+    },
+    {
+      "id": "eu_council_2025_12_12",
+      "label": "Council of the EU：small parcels customs duty from 1 July 2026",
+      "url": "https://www.consilium.europa.eu/en/press/press-releases/2025/12/12/customs-council-agrees-to-levy-customs-duty-on-small-parcels-as-of-1-july-2026/"
+    },
+    {
+      "id": "eu_council_2026_02_11",
+      "label": "Council of the EU：final green light for small parcels duty",
+      "url": "https://www.consilium.europa.eu/en/press/press-releases/2026/02/11/council-gives-final-green-light-to-new-customs-duty-rules-for-small-parcels/"
+    },
+    {
+      "id": "cbp_csms",
+      "label": "U.S. CBP CSMS #66065494 de minimis suspension",
+      "url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3f01456"
+    },
+    {
+      "id": "uk_lvi",
+      "label": "33 Bedford Row：end of the £135 customs duty relief",
+      "url": "https://33bedfordrow.co.uk/insights/bulletins/the-end-of-the-135-customs-duty-relief-what-importers-and-platforms-need-to-know"
+    },
+    {
+      "id": "zonos",
+      "label": "Zonos Classify rebuilt（厂商自报）",
+      "url": "https://zonos.com/blog/classify-rebuilt"
+    },
+    {
+      "id": "llm_ecommerce",
+      "label": "Investigating LLM Applications in E-Commerce",
+      "url": "https://arxiv.org/pdf/2408.12779"
+    },
+    {
+      "id": "qwen_taobao",
+      "label": "The Next Web：Alibaba integrates Qwen AI with Taobao",
+      "url": "https://thenextweb.com/news/alibaba-integrates-qwen-ai-with-taobao"
+    }
+  ]
+}
